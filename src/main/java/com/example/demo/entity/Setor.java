@@ -19,6 +19,9 @@ public class Setor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name="id", nullable=false)
     private Armazem armazem;
 
     @OneToMany(mappedBy="setor")

@@ -5,10 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -21,4 +19,10 @@ public class Armazem {
     private Long id;
     private String nome;
     private String cep;
+
+    @OneToMany(mappedBy="armazem")
+    private Set<Setor> setors;
+
+    @OneToMany(mappedBy="armazem")
+    private Set<Representante> representantes;
 }

@@ -20,6 +20,6 @@ public class Representante {
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name="armazem_id", nullable=false)
+    @JoinColumn(name="id", nullable=false)
     private Armazem armazem;
 }
