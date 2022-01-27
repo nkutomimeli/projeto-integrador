@@ -16,6 +16,7 @@ import java.util.Set;
 public class Armazem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_armazem")
     private Long id;
     private String nome;
     private String cep;

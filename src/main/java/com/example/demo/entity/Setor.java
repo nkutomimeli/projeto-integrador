@@ -18,10 +18,11 @@ public class Setor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "setor_id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="id", nullable=false)
+    @JoinColumn(name="id", nullable=false) // insertable = false, updatable = false)
     private Armazem armazem;
 
     @OneToMany(mappedBy="setor")

@@ -18,11 +18,12 @@ public class OrdemEntrada {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_ordem_entrada")
     private Long id;
     private LocalDateTime dataCriacao;
 
     @ManyToOne
-    @JoinColumn(name="id", nullable=false)
+    @JoinColumn(name="setor_id", nullable=false)
     private Setor setor;
 
     @OneToMany(mappedBy="ordemEntrada") // ordem_entrada ???

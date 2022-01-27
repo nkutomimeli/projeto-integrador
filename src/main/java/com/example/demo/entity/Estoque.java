@@ -21,11 +21,11 @@ public class Estoque {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="id", nullable=false)
+    @JoinColumn(name="id_anuncio", nullable=false)
     private Anuncio anuncio;
 
     @ManyToOne
-    @JoinColumn(name="id", nullable=false)
+    @JoinColumn(name="id_ordem_entrada", nullable=false)
     private OrdemEntrada ordemEntrada;
 
     private Integer quantidadeInicial;

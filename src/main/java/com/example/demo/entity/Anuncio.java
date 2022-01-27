@@ -18,14 +18,15 @@ public class Anuncio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_anuncio")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="id", nullable=false)
+    @JoinColumn(name="id_produto", nullable=false)
     private Produto produto;
 
     @ManyToOne
-    @JoinColumn(name="id", nullable=false)
+    @JoinColumn(name="id_vendedor", nullable=false)
     private Vendedor vendedor;
 
     private BigDecimal preco; // em R$

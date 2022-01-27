@@ -16,10 +16,11 @@ public class Representante {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "representante_id")
     private Long id;
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name="id", nullable=false)
+    @JoinColumn(name="id_armazem", nullable=false)
     private Armazem armazem;
 }
