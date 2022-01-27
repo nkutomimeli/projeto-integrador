@@ -1,12 +1,11 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.OrdemEntrada;
-import com.example.demo.entity.Estoque;
-import com.example.demo.entity.Produto;
-import com.example.demo.entity.Vendedor;
+import com.example.demo.dto.InboundOrderDTO;
+import com.example.demo.entity.*;
 import com.example.demo.mock.AnuncioMock;
 import com.example.demo.mock.ProdutoMock;
 import com.example.demo.mock.VendedorMock;
+import com.example.demo.service.OrdemEntradaService;
 import com.example.demo.service.ProdutoService;
 import com.example.demo.service.VendedorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/fresh-products")
@@ -49,14 +49,15 @@ public class OrdemCadastroController {
         anuncioMock.cargaInicial();
     }
 
-//    @Autowired
-//    private OrdemEntradaService ordemEntradaService;
-//
-//    @PostMapping("/inboundorder")
-//    public ResponseEntity<List<Produto>> cadastraLote(@Valid @RequestBody OrdemEntrada ordemEntrada) {
-//        List<Produto> listaProduto = ordemEntrada.salvar(ordemEntrada);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(listaProduto);
-//    }
+    @Autowired
+   private OrdemEntradaService ordemEntradaService;
+
+    @PostMapping("/inboundorder")
+   public ResponseEntity<Set<Estoque>> cadastraLote(@Valid @RequestBody InboundOrderDTO inboundOrderDTO) {
+
+       Set<Estoque> listaEstoque = ordemEntradaService.save(inboundOrderDTO);
+       return ResponseEntity.status(HttpStatus.CREATED).body(listaEstoque);
+   }
 //
 //    @PutMapping("/inboundorder")
 //    public ResponseEntity<Estoque> atualizaEstoque(@Valid @RequestBody OrdemEntrada ordemEntrada) {
