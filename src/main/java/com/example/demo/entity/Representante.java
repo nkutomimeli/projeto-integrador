@@ -14,13 +14,12 @@ import javax.persistence.*;
 @Entity
 public class Representante {
 
-//    @Column(name = "representante_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
 
-//    @JoinColumn(name="id_armazem", nullable=false)
     @ManyToOne
+    @JoinColumn(name="armazem_id", nullable=false)
     private Armazem armazem;
 }

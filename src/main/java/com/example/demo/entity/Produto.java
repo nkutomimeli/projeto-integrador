@@ -15,7 +15,6 @@ import java.util.Set;
 @Builder
 public class Produto {
 
-//    @Column(name = "id_produto")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

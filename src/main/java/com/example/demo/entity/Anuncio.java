@@ -16,17 +16,16 @@ import java.util.Set;
 @Builder
 public class Anuncio {
 
-//    @Column(name = "id_anuncio")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @JoinColumn(name="id_produto", nullable=false)
     @ManyToOne
+    @JoinColumn(name="produto_id", nullable=false)
     private Produto produto;
 
-//    @JoinColumn(name="id_vendedor", nullable=false)
     @ManyToOne
+    @JoinColumn(name="vendedor_id", nullable=false)
     private Vendedor vendedor;
 
     private BigDecimal preco; // em R$

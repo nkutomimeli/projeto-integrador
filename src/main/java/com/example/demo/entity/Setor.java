@@ -16,14 +16,12 @@ import java.util.Set;
 @Builder
 public class Setor {
 
-//    @Column(name = "setor_id")
-//    @Column(name = "id_setor")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @JoinColumn(name="id_armazem", nullable=false) // insertable = false, updatable = false)
     @ManyToOne
+    @JoinColumn(name="armazem_id", nullable=false) // insertable = false, updatable = false)
     private Armazem armazem;
 
     private String nome;
