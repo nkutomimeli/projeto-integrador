@@ -8,18 +8,21 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Set;
 
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
-public class Vendedor {
+public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
 
-    @OneToMany(mappedBy="vendedor")
+    private String nome;
+    private String descricao;
+
+    @OneToMany(mappedBy = "produto")
     private Set<Anuncio> anuncios;
+
 }
