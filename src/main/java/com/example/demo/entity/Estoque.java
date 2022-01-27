@@ -6,25 +6,32 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OrdemEntrada {
+public class Estoque {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDateTime dataCriacao;
 
     @ManyToOne
     @JoinColumn(name="id", nullable=false)
-    private Setor setor;
+    private Anuncio anuncio;
 
-    @OneToMany(mappedBy="ordemEntrada") // ordem_entrada ???
-    private Set<Estoque> estoques;
+    @ManyToOne
+    @JoinColumn(name="id", nullable=false)
+    private OrdemEntrada ordemEntrada;
+
+    private Integer quantidadeInicial;
+    private Integer quantidadeAtual;
+    private Double temperaturaAtual;
+    private LocalDate dataValidade;
+    private LocalDateTime dataProducao;
+
 }

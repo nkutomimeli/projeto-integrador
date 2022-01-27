@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
@@ -14,17 +14,25 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OrdemEntrada {
+public class Anuncio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDateTime dataCriacao;
 
     @ManyToOne
     @JoinColumn(name="id", nullable=false)
-    private Setor setor;
+    private Produto produto;
 
-    @OneToMany(mappedBy="ordemEntrada") // ordem_entrada ???
+    @ManyToOne
+    @JoinColumn(name="id", nullable=false)
+    private Vendedor vendedor;
+
+    private BigDecimal preco; // em R$
+    private Double volume; // em m3
+    private Double temperaturaMaxima;
+    private Double temperaturaMinima;
+
+    @OneToMany(mappedBy="anuncio")
     private Set<Estoque> estoques;
 }
