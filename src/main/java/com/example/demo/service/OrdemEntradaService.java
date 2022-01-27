@@ -33,6 +33,9 @@ public class OrdemEntradaService {
     public Set<Estoque> save(InboundOrderDTO ordemEntradaDTO){
         OrdemEntrada ordemEntrada = new OrdemEntrada();
 
+        System.out.println("CONTEUDO DO SETOR ID:");
+        System.out.println(ordemEntradaDTO.getOrdemEntradaDTO().getSetor_id());
+
         Setor setor = this.setorRepository.findById(ordemEntradaDTO.getOrdemEntradaDTO().getSetor_id()).orElse(new Setor());
         ordemEntrada.setSetor(setor);
         ordemEntrada.setEstoques(ordemEntradaDTO.getListaEstoque());
