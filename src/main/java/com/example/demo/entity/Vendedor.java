@@ -15,9 +15,9 @@ import java.util.Set;
 @Entity
 public class Vendedor {
 
+//    @Column(name = "id_vendedor")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_vendedor")
     private Long id;
     private String nome;
 

@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.OrdemCadastro;
 import com.example.demo.entity.OrdemEntrada;
 import com.example.demo.entity.Estoque;
 import com.example.demo.entity.Produto;
@@ -16,18 +15,18 @@ import java.util.List;
 @RequestMapping("/api/v1/fresh-products")
 public class OrdemCadastroController {
 
-    @Autowired
-    private OrdemCadastroService ordemCadastro;
-
-    @PostMapping("/inboundorder")
-    public ResponseEntity<List<Produto>> cadastraLote(@Valid @RequestBody OrdemCadastro ordemCadastro) {
-        List<Produto> listaProduto =  ordemCadastro.salvar(ordemCadastro);
-        return ResponseEntity.status(HttpStatus.CREATED).body(listaProduto);
-    }
-
-    @PutMapping("/inboundorder")
-    public ResponseEntity<Estoque> atualizaEstoque(@Valid @RequestBody OrdemCadastro ordemCadastro) {
-        Estoque estoqueAtualizado = ordemCadastro.atualizar(ordemCadastro);
-        return ResponseEntity.status(HttpStatus.CREATED).body(estoqueAtualizado);
-    }
+//    @Autowired
+//    private OrdemEntradaService ordemEntradaService;
+//
+//    @PostMapping("/inboundorder")
+//    public ResponseEntity<List<Produto>> cadastraLote(@Valid @RequestBody OrdemEntrada ordemEntrada) {
+//        List<Produto> listaProduto = ordemEntrada.salvar(ordemEntrada);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(listaProduto);
+//    }
+//
+//    @PutMapping("/inboundorder")
+//    public ResponseEntity<Estoque> atualizaEstoque(@Valid @RequestBody OrdemEntrada ordemEntrada) {
+//        Estoque estoqueAtualizado = ordemEntrada.atualizar(ordemEntrada);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(estoqueAtualizado);
+//    }
 }

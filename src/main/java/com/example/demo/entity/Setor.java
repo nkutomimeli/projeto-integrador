@@ -16,14 +16,18 @@ import java.util.Set;
 @Builder
 public class Setor {
 
+//    @Column(name = "setor_id")
+//    @Column(name = "id_setor")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "setor_id")
     private Long id;
 
+//    @JoinColumn(name="id_armazem", nullable=false) // insertable = false, updatable = false)
     @ManyToOne
-    @JoinColumn(name="id", nullable=false) // insertable = false, updatable = false)
     private Armazem armazem;
+
+    private String nome;
+    private Double volume;
 
     @OneToMany(mappedBy="setor")
     private Set<OrdemEntrada> ordemEntradas;

@@ -20,12 +20,12 @@ public class Estoque {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+//    @JoinColumn(name="id_anuncio", nullable=false)
     @ManyToOne
-    @JoinColumn(name="id_anuncio", nullable=false)
     private Anuncio anuncio;
 
+//    @JoinColumn(name="id_ordem_entrada", nullable=false)
     @ManyToOne
-    @JoinColumn(name="id_ordem_entrada", nullable=false)
     private OrdemEntrada ordemEntrada;
 
     private Integer quantidadeInicial;

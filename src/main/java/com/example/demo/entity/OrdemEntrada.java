@@ -16,14 +16,14 @@ import java.util.Set;
 @Builder
 public class OrdemEntrada {
 
+//    @Column(name = "id_ordem_entrada")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_ordem_entrada")
     private Long id;
     private LocalDateTime dataCriacao;
 
+//    @JoinColumn(name="id_setor", nullable=false)
     @ManyToOne
-    @JoinColumn(name="setor_id", nullable=false)
     private Setor setor;
 
     @OneToMany(mappedBy="ordemEntrada") // ordem_entrada ???
