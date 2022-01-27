@@ -7,21 +7,20 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Setor {
+public class OrdemEntrada {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Armazem armazem;
+    private LocalDateTime dataCriacao;
 
-    @OneToMany(mappedBy="setor")
-    private Set<OrdemEntrada> ordemEntradas;
-
+    @ManyToOne
+    @JoinColumn(name="id", nullable=false)
+    private Setor setor;
 }

@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class produto {
     private UUID id;
-    private OrdemCadastro ordemCadastro;
+    private OrdemEntrada ordemCadastro;
     private Double temperaturaAtual;
     private Double temperaturaMinima;
     private Integer quantidadeInicial;
