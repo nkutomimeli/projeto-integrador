@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,12 +23,14 @@ public class Setor {
 
     @ManyToOne
     @JoinColumn(name="armazem_id", nullable=false) // insertable = false, updatable = false)
+    @JsonIgnore
     private Armazem armazem;
 
     private String nome;
     private Double volume;
 
     @OneToMany(mappedBy="setor")
+    @JsonIgnore
     private Set<OrdemEntrada> ordemEntradas;
 
 }
