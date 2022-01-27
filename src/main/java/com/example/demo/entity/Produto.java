@@ -6,21 +6,27 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.UUID;
 
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
-public class Representante {
+public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "representante_id")
+    @Column(name = "id_produto")
     private Long id;
-    private String nome;
 
-    @ManyToOne
-    @JoinColumn(name="id_armazem", nullable=false)
-    private Armazem armazem;
+    private String nome;
+    private String descricao;
+
+    @OneToMany(mappedBy = "produto")
+    private Set<Anuncio> anuncios;
+
 }

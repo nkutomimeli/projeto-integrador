@@ -14,18 +14,18 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Setor {
+public class OrdemEntrada {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "setor_id")
+    @Column(name = "id_ordem_entrada")
     private Long id;
+    private LocalDateTime dataCriacao;
 
     @ManyToOne
-    @JoinColumn(name="id", nullable=false) // insertable = false, updatable = false)
-    private Armazem armazem;
+    @JoinColumn(name="setor_id", nullable=false)
+    private Setor setor;
 
-    @OneToMany(mappedBy="setor")
-    private Set<OrdemEntrada> ordemEntradas;
-
+    @OneToMany(mappedBy="ordemEntrada") // ordem_entrada ???
+    private Set<Estoque> estoques;
 }
