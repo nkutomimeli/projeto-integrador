@@ -21,6 +21,6 @@ public class OrdemEntrada {
     private LocalDateTime dataCriacao;
 
     @ManyToOne
-    @JoinColumn(name="id", nullable=false)
+    @JoinColumn(name="setor_id", nullable=false)
     private Setor setor;
 }
