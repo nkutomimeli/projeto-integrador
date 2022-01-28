@@ -42,7 +42,7 @@ public class EstoqueDTO {
 
     public static EstoqueDTO converte(Estoque e) {
         EstoqueDTO dto = EstoqueDTO.builder()
-                .anuncio_id(1L) // problema aqui
+                .anuncio_id(e.getAnuncio().getId())
                 .ordem_entrada_id(e.getOrdemEntrada().getId())
                 .quantidadeInicial(e.getQuantidadeInicial())
                 .quantidadeAtual(e.getQuantidadeAtual())

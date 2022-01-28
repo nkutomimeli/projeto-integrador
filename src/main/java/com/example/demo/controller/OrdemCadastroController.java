@@ -27,9 +27,6 @@ public class OrdemCadastroController {
     private ProdutoMock produtoMock;
 
     @Autowired
-    private VendedorService vendedorService;
-
-    @Autowired
     private AnuncioMock anuncioMock;
 
     @GetMapping("/cargaVendedor")
