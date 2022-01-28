@@ -1,6 +1,5 @@
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,13 +18,10 @@ public class OrdemEntrada {
     private Long id;
     private LocalDateTime dataCriacao;
 
-
     @ManyToOne
-    @JoinColumn(name="setor_id", nullable=false)
-    @JsonIgnore
+    @JoinColumn(name="setor_id")
     private Setor setor;
 
-    @OneToMany(mappedBy="ordemEntrada") // ordem_entrada ???
-    @JsonIgnore
+    @OneToMany(mappedBy="ordemEntrada")
     private Set<Estoque> estoques;
 }

@@ -1,7 +1,5 @@
 package com.example.demo.dto;
 
-
-import com.example.demo.entity.Estoque;
 import lombok.*;
 
 import java.util.Set;
