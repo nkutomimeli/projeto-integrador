@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,5 +22,6 @@ public class Representante {
 
     @ManyToOne
     @JoinColumn(name="armazem_id", nullable=false)
+    @JsonIgnore
     private Armazem armazem;
 }

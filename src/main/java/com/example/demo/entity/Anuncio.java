@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,10 +23,12 @@ public class Anuncio {
 
     @ManyToOne
     @JoinColumn(name="produto_id", nullable=false)
+    @JsonIgnore
     private Produto produto;
 
     @ManyToOne
     @JoinColumn(name="vendedor_id", nullable=false)
+    @JsonIgnore
     private Vendedor vendedor;
 
     private BigDecimal preco; // em R$
@@ -34,5 +37,6 @@ public class Anuncio {
     private Double temperaturaMinima;
 
     @OneToMany(mappedBy="anuncio")
+    @JsonIgnore
     private Set<Estoque> estoques;
 }

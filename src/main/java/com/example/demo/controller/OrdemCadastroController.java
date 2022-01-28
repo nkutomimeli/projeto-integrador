@@ -54,10 +54,17 @@ public class OrdemCadastroController {
 
     @PostMapping("/inboundorder")
    public ResponseEntity<Set<Estoque>> cadastraLote(@Valid @RequestBody InboundOrderDTO inboundOrderDTO) {
-
        Set<Estoque> listaEstoque = ordemEntradaService.save(inboundOrderDTO);
        return ResponseEntity.status(HttpStatus.CREATED).body(listaEstoque);
    }
+
+    @GetMapping("/inboundorder/{id}")
+    public ResponseEntity<Setor> cadastraLote(@PathVariable Long id) {
+
+        Setor setor = ordemEntradaService.get(id);
+        return ResponseEntity.status(HttpStatus.CREATED).body(setor);
+    }
+
 //
 //    @PutMapping("/inboundorder")
 //    public ResponseEntity<Estoque> atualizaEstoque(@Valid @RequestBody OrdemEntrada ordemEntrada) {

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Data
@@ -38,7 +39,8 @@ public class OrdemEntradaService {
 
         Setor setor = this.setorRepository.findById(ordemEntradaDTO.getOrdemEntradaDTO().getSetor_id()).orElse(new Setor());
         ordemEntrada.setSetor(setor);
-        ordemEntrada.setEstoques(ordemEntradaDTO.getListaEstoque());
+
+        ordemEntrada.setEstoques(ordemEntradaDTO.getListaEstoqueDTO());
         ordemEntrada.setDataCriacao(ordemEntradaDTO.getOrdemEntradaDTO().getDataCriacao());
 
         // SALVO A ORDEM DE ENTRADA
@@ -50,5 +52,10 @@ public class OrdemEntradaService {
             this.estoqueRepository.save(estoque);
         }));
         return listaEstoque;
+    }
+
+    public Setor get(Long id) {
+        Setor setor = this.setorRepository.findById(1L).orElse(new Setor());
+        return setor;
     }
 }

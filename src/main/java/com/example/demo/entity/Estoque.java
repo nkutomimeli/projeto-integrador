@@ -1,9 +1,7 @@
 package com.example.demo.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,6 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Estoque {
 
     @Id
@@ -21,11 +20,11 @@ public class Estoque {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="anuncio_id", nullable=false)
+    @JoinColumn(name="anuncio_id")
     private Anuncio anuncio;
 
     @ManyToOne
-    @JoinColumn(name="ordem_entrada_id", nullable=false)
+    @JoinColumn(name="ordem_entrada_id")
     private OrdemEntrada ordemEntrada;
 
     private Integer quantidadeInicial;

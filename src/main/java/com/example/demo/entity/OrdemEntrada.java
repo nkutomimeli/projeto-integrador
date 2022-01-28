@@ -1,9 +1,7 @@
 package com.example.demo.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -21,10 +19,13 @@ public class OrdemEntrada {
     private Long id;
     private LocalDateTime dataCriacao;
 
+
     @ManyToOne
     @JoinColumn(name="setor_id", nullable=false)
+    @JsonIgnore
     private Setor setor;
 
     @OneToMany(mappedBy="ordemEntrada") // ordem_entrada ???
+    @JsonIgnore
     private Set<Estoque> estoques;
 }

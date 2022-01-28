@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,8 +23,10 @@ public class Armazem {
     private String cep;
 
     @OneToMany(mappedBy="armazem")
+    @JsonIgnore
     private Set<Setor> setors;
 
     @OneToMany(mappedBy="armazem")
+    @JsonIgnore
     private Set<Representante> representantes;
 }

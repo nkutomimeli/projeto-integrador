@@ -1,13 +1,12 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -15,6 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Setor {
 
     @Id
@@ -23,14 +23,12 @@ public class Setor {
 
     @ManyToOne
     @JoinColumn(name="armazem_id", nullable=false) // insertable = false, updatable = false)
-    @JsonIgnore
     private Armazem armazem;
 
     private String nome;
     private Double volume;
 
     @OneToMany(mappedBy="setor")
-    @JsonIgnore
     private Set<OrdemEntrada> ordemEntradas;
 
 }

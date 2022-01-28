@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +25,7 @@ public class Produto {
     private String descricao;
 
     @OneToMany(mappedBy = "produto")
+    @JsonIgnore
     private Set<Anuncio> anuncios;
 
 }
