@@ -1,9 +1,8 @@
 package com.example.demo.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,12 +20,18 @@ public class Estoque {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="anuncio_id", nullable=false)
+    @ToString.Exclude
+    @JsonManagedReference
+    @JoinColumn(name="anuncio_id")
     private Anuncio anuncio;
 
     @ManyToOne
-    @JoinColumn(name="ordem_entrada_id", nullable=false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonBackReference
+    @JoinColumn(name="ordem_entrada_id")
     private OrdemEntrada ordemEntrada;
+
 
     private Integer quantidadeInicial;
     private Integer quantidadeAtual;

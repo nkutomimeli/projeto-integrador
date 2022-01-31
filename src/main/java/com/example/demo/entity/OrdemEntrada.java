@@ -1,9 +1,8 @@
 package com.example.demo.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -22,9 +21,11 @@ public class OrdemEntrada {
     private LocalDateTime dataCriacao;
 
     @ManyToOne
-    @JoinColumn(name="setor_id", nullable=false)
+    @JoinColumn(name="setor_id")
     private Setor setor;
 
-    @OneToMany(mappedBy="ordemEntrada") // ordem_entrada ???
+    @OneToMany(mappedBy="ordemEntrada")
+    @ToString.Exclude
+    @JsonManagedReference
     private Set<Estoque> estoques;
 }

@@ -1,16 +1,8 @@
 package com.example.demo.dto;
 
-
-import com.example.demo.entity.Anuncio;
-import com.example.demo.entity.Estoque;
 import com.example.demo.entity.OrdemEntrada;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -19,5 +11,16 @@ import java.util.Set;
 @Builder
 public class InboundOrderDTO {
     private OrdemEntradaDTO ordemEntradaDTO;
-    private Set<Estoque> listaEstoque;
+    private Set<EstoqueDTO> listaEstoqueDTO;
+
+    public static InboundOrderDTO converte(OrdemEntrada ordemEntrada){
+        OrdemEntradaDTO ordemEntradaDTO = new OrdemEntradaDTO(ordemEntrada.getDataCriacao(), ordemEntrada.getId());
+        Set<EstoqueDTO> listaEstoque = EstoqueDTO.converte(ordemEntrada.getEstoques());
+
+        InboundOrderDTO dto = InboundOrderDTO.builder()
+                .ordemEntradaDTO(ordemEntradaDTO)
+                .listaEstoqueDTO(listaEstoque)
+                .build();
+        return dto;
+    }
 }

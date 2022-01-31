@@ -1,9 +1,7 @@
 package com.example.demo.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -21,5 +19,6 @@ public class Vendedor {
     private String nome;
 
     @OneToMany(mappedBy="vendedor")
+    @JsonIgnore
     private Set<Anuncio> anuncios;
 }

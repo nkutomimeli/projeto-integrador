@@ -23,7 +23,7 @@ public class AnuncioMock {
     @Autowired
     private VendedorService vendedorService;
 
-    public void cargaInicial(){
+    /*public void cargaInicial(){
         Produto p1 = this.produtoService.findById(1L);
         Vendedor v1 = this.vendedorService.findById(4L);
 
@@ -39,5 +39,5 @@ public class AnuncioMock {
         this.anuncioService.save(a1);
 
     }
-
+   */
 }

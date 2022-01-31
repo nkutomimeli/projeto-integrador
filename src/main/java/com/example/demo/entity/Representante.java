@@ -1,17 +1,14 @@
 package com.example.demo.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Representante {
 
     @Id
@@ -20,6 +17,6 @@ public class Representante {
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name="armazem_id", nullable=false)
+    @JoinColumn(name="armazem_id")
     private Armazem armazem;
 }

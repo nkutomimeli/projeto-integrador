@@ -1,19 +1,20 @@
 package com.example.demo.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.example.demo.enums.Tipos;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
-@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Data
 public class Anuncio {
 
     @Id
@@ -32,7 +33,10 @@ public class Anuncio {
     private Double volume; // em m3
     private Double temperaturaMaxima;
     private Double temperaturaMinima;
+    private Tipos tipo; // ENUM  CONGELADO (1, "Congelado"), REFRIGERADO (2, "Refrigerado"), FRESCO  (3, "Fresco");
 
     @OneToMany(mappedBy="anuncio")
+    @ToString.Exclude
+    @JsonBackReference
     private Set<Estoque> estoques;
 }
