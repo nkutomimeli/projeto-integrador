@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 @Builder
 public class EstoqueDTO {
 
+    private Long id;
     private Long anuncio_id;
     private Long ordem_entrada_id;
     private Integer quantidadeInicial;
@@ -29,6 +31,7 @@ public class EstoqueDTO {
 
     public static Estoque converte(EstoqueDTO dto, Anuncio anuncio, OrdemEntrada ordemEntrada) {
         Estoque estoque = Estoque.builder()
+                .id(dto.getId())
                 .anuncio(anuncio)
                 .ordemEntrada(ordemEntrada)
                 .quantidadeInicial(dto.getQuantidadeInicial())
@@ -42,6 +45,7 @@ public class EstoqueDTO {
 
     public static EstoqueDTO converte(Estoque e) {
         EstoqueDTO dto = EstoqueDTO.builder()
+                .id(e.getId())
                 .anuncio_id(e.getAnuncio().getId())
                 .ordem_entrada_id(e.getOrdemEntrada().getId())
                 .quantidadeInicial(e.getQuantidadeInicial())
@@ -55,5 +59,9 @@ public class EstoqueDTO {
 
     public static List<EstoqueDTO> converte(List<Estoque> estoque) {
         return estoque.stream().map(EstoqueDTO::converte).collect(Collectors.toList());
+    }
+
+    public static Set<EstoqueDTO> converte(Set<Estoque> estoque) {
+        return estoque.stream().map(EstoqueDTO::converte).collect(Collectors.toSet());
     }
 }
