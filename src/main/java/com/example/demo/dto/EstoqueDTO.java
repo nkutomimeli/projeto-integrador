@@ -7,7 +7,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,9 +22,13 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Validated
 public class EstoqueDTO {
 
     private Long id;
+    @NotEmpty(message = "OrdemEntradaDto em branco, favor fornecê-lo!")
+    @NotBlank(message = "OrdemEntradaDto em branco, favor fornecê-lo!")
+    @NotNull(message = "OrdemEntradaDTO em branco, favor fornecê-lo!")
     private Long anuncio_id;
     private Long ordem_entrada_id;
     private Integer quantidadeInicial;
