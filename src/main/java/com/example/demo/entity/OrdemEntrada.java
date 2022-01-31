@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,5 +25,7 @@ public class OrdemEntrada {
     private Setor setor;
 
     @OneToMany(mappedBy="ordemEntrada")
+    @ToString.Exclude
+    @JsonManagedReference
     private Set<Estoque> estoques;
 }

@@ -62,8 +62,12 @@ public class OrdemEntradaService {
 
     public InboundOrderDTO atualiza(InboundOrderDTO inboundOrderDTO, Long id) {
         OrdemEntrada ordemEntrada = this.ordemEntradaRepository.findById(id).orElse(new OrdemEntrada());
+//        OrdemEntrada ordemEntrada = this.ordemEntradaRepository.findAll();
 
         Setor setor = this.setorRepository.findById(inboundOrderDTO.getOrdemEntradaDTO().getSetor_id()).orElse(new Setor());
+
+
+
         ordemEntrada.setSetor(setor);
         ordemEntrada.setDataCriacao(inboundOrderDTO.getOrdemEntradaDTO().getDataCriacao());
 
@@ -77,5 +81,10 @@ public class OrdemEntradaService {
         }));
 
         return InboundOrderDTO.converte(ordemEntradaAtualizada);
+    }
+
+    public OrdemEntrada getOrdemById(Long id) {
+        OrdemEntrada ordemEntrada = this.ordemEntradaRepository.findById(id).orElse(new OrdemEntrada());
+        return ordemEntrada;
     }
 }

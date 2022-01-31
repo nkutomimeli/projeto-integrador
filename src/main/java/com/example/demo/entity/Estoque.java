@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,7 +13,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Estoque {
 
     @Id
@@ -19,12 +20,18 @@ public class Estoque {
     private Long id;
 
     @ManyToOne
+    @ToString.Exclude
+    @JsonManagedReference
     @JoinColumn(name="anuncio_id")
     private Anuncio anuncio;
 
     @ManyToOne
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonBackReference
     @JoinColumn(name="ordem_entrada_id")
     private OrdemEntrada ordemEntrada;
+
 
     private Integer quantidadeInicial;
     private Integer quantidadeAtual;

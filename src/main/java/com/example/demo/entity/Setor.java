@@ -20,10 +20,11 @@ public class Setor {
     @JoinColumn(name="armazem_id") // insertable = false, updatable = false)
     private Armazem armazem;
 
-    private String nome;
+    private String nome; // CONGELADO, REFRIGERADO, FRESCO
     private Double volume;
 
     @OneToMany(mappedBy="setor")
     private Set<OrdemEntrada> ordemEntradas;
 
 }
+

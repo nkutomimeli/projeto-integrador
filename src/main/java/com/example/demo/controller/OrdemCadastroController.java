@@ -30,4 +30,11 @@ public class OrdemCadastroController {
         InboundOrderDTO ordemEntradaAtualizada = ordemEntradaService.atualiza(inboundOrderDTO, id);
         return ResponseEntity.status(HttpStatus.CREATED).body(ordemEntradaAtualizada);
     }
+
+    @GetMapping("/inboundorder/{id}")
+    public ResponseEntity<OrdemEntrada> getEstoque(@Valid @PathVariable Long id) {
+        OrdemEntrada ordemEntrada = ordemEntradaService.getOrdemById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(ordemEntrada);
+    }
+
 }
