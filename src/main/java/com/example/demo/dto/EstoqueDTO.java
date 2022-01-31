@@ -30,7 +30,7 @@ public class EstoqueDTO {
     private LocalDateTime dataProducao;
 
     public static Estoque converte(EstoqueDTO dto, Anuncio anuncio, OrdemEntrada ordemEntrada) {
-        Estoque estoque = Estoque.builder()
+        return Estoque.builder()
                 .id(dto.getId())
                 .anuncio(anuncio)
                 .ordemEntrada(ordemEntrada)
@@ -40,7 +40,6 @@ public class EstoqueDTO {
                 .dataValidade(dto.getDataValidade())
                 .dataProducao(dto.getDataProducao())
                 .build();
-        return estoque;
     }
 
     public static EstoqueDTO converte(Estoque e) {

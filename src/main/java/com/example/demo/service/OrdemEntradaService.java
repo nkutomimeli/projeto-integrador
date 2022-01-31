@@ -4,18 +4,22 @@ import com.example.demo.dto.EstoqueDTO;
 import com.example.demo.dto.InboundOrderDTO;
 import com.example.demo.dto.OrdemEntradaDTO;
 import com.example.demo.entity.*;
+import com.example.demo.enums.Tipos;
 import com.example.demo.repository.AnuncioRepository;
 import com.example.demo.repository.EstoqueRepository;
 import com.example.demo.repository.OrdemEntradaRepository;
 import com.example.demo.repository.SetorRepository;
+import exception.BusinessException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.SneakyThrows;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -39,26 +43,40 @@ public class OrdemEntradaService {
     @Autowired
     AnuncioRepository anuncioRepository;
 
+    @SneakyThrows
     public List<EstoqueDTO> save(InboundOrderDTO inboundOrderDTO){
         OrdemEntrada ordemEntrada = new OrdemEntrada();
 
-        Setor setor = this.setorRepository.findById(inboundOrderDTO.getOrdemEntradaDTO().getSetor_id()).orElse(new Setor());
+        Setor setor = this.setorRepository.getById(inboundOrderDTO.getOrdemEntradaDTO().getSetor_id());
+
         ordemEntrada.setSetor(setor);
         ordemEntrada.setDataCriacao(inboundOrderDTO.getOrdemEntradaDTO().getDataCriacao());
+        OrdemEntrada ordemEntradaSalva = new OrdemEntrada();
 
-        OrdemEntrada ordemEntradaSalva = this.ordemEntradaRepository.save(ordemEntrada);
+        //VALIDACAO DO SETOR
+        try{
+            ordemEntradaSalva = this.ordemEntradaRepository.save(ordemEntrada);
+        } catch (Exception e){
+            throw new BusinessException("Setor não cadastrado.");
+        }
+
+        //VALIDAR O TIPO DO PRODUTO == TIPO DO SETOR
+
 
         // SALVO O ESTOQUE
         Set<EstoqueDTO> listaEstoque = inboundOrderDTO.getListaEstoqueDTO();
+        OrdemEntrada finalOrdemEntradaSalva = ordemEntradaSalva;
         listaEstoque.forEach((estoque -> {
             Anuncio anuncio = this.anuncioRepository.findById(estoque.getAnuncio_id()).orElse(new Anuncio());
-            Estoque estoqueConvertido = EstoqueDTO.converte(estoque, anuncio, ordemEntradaSalva);
+            Estoque estoqueConvertido = EstoqueDTO.converte(estoque, anuncio, finalOrdemEntradaSalva);
             this.estoqueRepository.save(estoqueConvertido);
         }));
 
         List<Estoque> estoqueCadastrado = this.estoqueRepository.findAllEstoque(ordemEntradaSalva);
         return EstoqueDTO.converte(estoqueCadastrado);
     }
+
+
 
     public InboundOrderDTO atualiza(InboundOrderDTO inboundOrderDTO, Long id) {
         OrdemEntrada ordemEntrada = this.ordemEntradaRepository.findById(id).orElse(new OrdemEntrada());
