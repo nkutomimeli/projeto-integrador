@@ -27,7 +27,7 @@ public class OrdemCadastroController {
 
     @PutMapping("/inboundorder/{id}")
     public ResponseEntity<InboundOrderDTO> atualizaEstoque(@Valid @RequestBody InboundOrderDTO inboundOrderDTO, @PathVariable Long id) {
-        InboundOrderDTO ordemEntradaAtualizada = ordemEntradaService.atualiza(inboundOrderDTO, id);
+        InboundOrderDTO ordemEntradaAtualizada = ordemEntradaService.update(inboundOrderDTO, id);
         return ResponseEntity.status(HttpStatus.CREATED).body(ordemEntradaAtualizada);
     }
 
