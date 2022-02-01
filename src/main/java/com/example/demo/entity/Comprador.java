@@ -7,12 +7,12 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
 public class Comprador {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,5 +23,5 @@ public class Comprador {
     @OneToMany(mappedBy="comprador")
     @ToString.Exclude
     @JsonBackReference
-    private Set<Carrinho> carrinho;
+    private Set<Carrinho> carrinhos;
 }
