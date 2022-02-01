@@ -12,4 +12,9 @@ public class ControllerAdvice {
     protected ResponseEntity<Object> handleBusinessException(BusinessException ex, WebRequest request) {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    protected ResponseEntity<Object> handleRuntimeException(RuntimeException ex, WebRequest request) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
+    }
 }

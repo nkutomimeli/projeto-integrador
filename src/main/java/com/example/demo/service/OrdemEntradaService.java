@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.bean.VolumeEstoqueAtualizado;
 import com.example.demo.dto.EstoqueDTO;
 import com.example.demo.dto.InboundOrderDTO;
 import com.example.demo.dto.OrdemEntradaDTO;
@@ -20,10 +21,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
@@ -60,16 +58,28 @@ public class OrdemEntradaService {
             throw new BusinessException("Setor não cadastrado.");
         }
 
-        //VALIDAR O TIPO DO PRODUTO == TIPO DO SETOR
-
-
         // SALVO O ESTOQUE
         Set<EstoqueDTO> listaEstoque = inboundOrderDTO.getListaEstoqueDTO();
         OrdemEntrada finalOrdemEntradaSalva = ordemEntradaSalva;
         listaEstoque.forEach((estoque -> {
             Anuncio anuncio = this.anuncioRepository.findById(estoque.getAnuncio_id()).orElse(new Anuncio());
-            Estoque estoqueConvertido = EstoqueDTO.converte(estoque, anuncio, finalOrdemEntradaSalva);
-            this.estoqueRepository.save(estoqueConvertido);
+
+            //VALIDAR O TIPO DO PRODUTO == TIPO DO SETOR
+            if (anuncio.getTipo().getDescricao().equals(setor.getNome())) {
+                Estoque estoqueConvertido = EstoqueDTO.converte(estoque, anuncio, finalOrdemEntradaSalva);
+                this.estoqueRepository.save(estoqueConvertido);
+            } else {
+                throw new RuntimeException("Setor inválido");
+            }
+
+            //VALIDAR O ESPACO DISPONIVEL DO SETOR
+            List<Object>  tupla = this.ordemEntradaRepository.findAllSetor();
+            List<VolumeEstoqueAtualizado> teste = tupla;
+            System.out.println();
+            tupla.forEach((setor1 -> {
+                System.out.println(setor1.toString());
+            }));
+
         }));
 
         List<Estoque> estoqueCadastrado = this.estoqueRepository.findAllEstoque(ordemEntradaSalva);

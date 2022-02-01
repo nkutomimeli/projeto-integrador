@@ -15,14 +15,14 @@ Insert into vendedor (nome) values ('Clara');
 Insert into vendedor (nome) values ('Zoe');
 
 -- Inserção de anuncios
-Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima, temperatura_minima, tipo) values (1, 1, 5, 0.0001, 25, 10, 1);
-Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima, temperatura_minima, tipo) values (1, 3, 12, 0.001, 18, 5, 2);
-Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima, temperatura_minima, tipo) values (2, 2, 6, 0.0002, 25, 15, 1);
-Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima, temperatura_minima, tipo) values (2, 6, 5, 0.002, 5, -15, 3);
-Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima, temperatura_minima, tipo) values (3, 4, 7, 0.0001, 15, 2, 2);
-Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima, temperatura_minima, tipo) values (3, 2, 6.5, 0.0002, 25, 15, 1);
-Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima, temperatura_minima, tipo) values (4, 5, 23, 0.0015, 5, -15, 3);
-Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima, temperatura_minima, tipo) values (4, 3, 13, 0.001, 18, 5, 2);
+Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima, temperatura_minima, tipo) values (1, 1, 5, 0.0001, 25, 10, 0);
+Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima, temperatura_minima, tipo) values (1, 3, 12, 0.001, 18, 5, 1);
+Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima, temperatura_minima, tipo) values (2, 2, 6, 0.0002, 25, 15, 0);
+Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima, temperatura_minima, tipo) values (2, 6, 5, 0.002, 5, -15, 2);
+Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima, temperatura_minima, tipo) values (3, 4, 7, 0.0001, 15, 2, 1);
+Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima, temperatura_minima, tipo) values (3, 2, 6.5, 0.0002, 25, 15, 0);
+Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima, temperatura_minima, tipo) values (4, 5, 23, 0.0015, 5, -15, 2);
+Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima, temperatura_minima, tipo) values (4, 3, 13, 0.001, 18, 5, 1);
 
 -- Inserção de armazem
 Insert into armazem (nome, CEP) values ('CD_Louveira', '00100-100');
