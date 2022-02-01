@@ -39,4 +39,9 @@ public class Anuncio {
     @ToString.Exclude
     @JsonBackReference
     private Set<Estoque> estoques;
+
+    @OneToMany(mappedBy="anuncio")
+    @ToString.Exclude
+    @JsonBackReference
+    private Set<ItemCarrinho> itensCarrinho;
 }
