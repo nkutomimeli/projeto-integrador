@@ -18,12 +18,9 @@ import java.time.LocalDateTime;
 @Validated
 public class OrdemEntradaDTO {
 
-    @NotNull(message = "OrdemEntradaDTO em branco, favor fornecê-lo!")
-    @Past(message = "OrdemEntradaDTO ter uma data do futuro.")
+    @NotNull(message = "Data de criação em branco, favor fornecê-lo!")
+    @PastOrPresent(message = "Data de criação deve ser inferior ou igual a data atual.")
     private LocalDateTime dataCriacao;
-
-
-
-    @NotNull
+    @NotNull(message = "Id do setor em branco, favor fornecê-lo!")
     private Long setor_id;
 }
