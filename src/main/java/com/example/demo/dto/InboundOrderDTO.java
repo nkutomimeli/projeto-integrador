@@ -16,6 +16,7 @@ import java.util.Set;
 @Builder
 @Validated
 public class InboundOrderDTO {
+
     @Valid
     private OrdemEntradaDTO ordemEntradaDTO;
 

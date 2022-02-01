@@ -26,8 +26,8 @@ import java.util.stream.Collectors;
 public class EstoqueDTO {
 
     private Long id;
-    @NotEmpty(message = "OrdemEntradaDto em branco, favor fornecê-lo!")
-    @NotBlank(message = "OrdemEntradaDto em branco, favor fornecê-lo!")
+//    @NotEmpty(message = "OrdemEntradaDto em branco, favor fornecê-lo!")
+//    @NotBlank(message = "OrdemEntradaDto em branco, favor fornecê-lo!")
     @NotNull(message = "OrdemEntradaDTO em branco, favor fornecê-lo!")
     private Long anuncio_id;
     private Long ordem_entrada_id;

@@ -21,5 +21,9 @@ public class OrdemEntradaDTO {
     @NotNull(message = "OrdemEntradaDTO em branco, favor fornecê-lo!")
     @Past(message = "OrdemEntradaDTO ter uma data do futuro.")
     private LocalDateTime dataCriacao;
+
+
+
+    @NotNull
     private Long setor_id;
 }
