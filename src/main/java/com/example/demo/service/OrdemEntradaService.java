@@ -3,10 +3,8 @@ package com.example.demo.service;
 import com.example.demo.dto.EstoqueDTO;
 import com.example.demo.dto.InboundOrderDTO;
 import com.example.demo.entity.*;
-import com.example.demo.repository.AnuncioRepository;
-import com.example.demo.repository.EstoqueRepository;
-import com.example.demo.repository.OrdemEntradaRepository;
-import com.example.demo.repository.SetorRepository;
+import com.example.demo.interfaces.CapacidadeSetor;
+import com.example.demo.repository.*;
 import exception.BusinessException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,6 +32,10 @@ public class OrdemEntradaService {
     @Autowired
     AnuncioRepository anuncioRepository;
 
+    // ------------------ //
+    // MÉTODOS PRINCIPAIS //
+    // ------------------ //
+
     @SneakyThrows
     public List<EstoqueDTO> save(InboundOrderDTO inboundOrderDTO){
         Setor setor = this.setorRepository.getById(inboundOrderDTO.getOrdemEntradaDTO().getSetor_id());
@@ -48,7 +50,14 @@ public class OrdemEntradaService {
 
         // SALVO O ESTOQUE
         Set<EstoqueDTO> listaEstoque = inboundOrderDTO.getListaEstoqueDTO();
-        saveListaEstoque(listaEstoque, ordemEntradaSalva, setor);
+        Double capacidadeDoSetor = this.getCapacidadeSetor(ordemEntradaSalva.getSetor().getId()).getVolume();
+        Double volumeTotalDaEntradaDeAnuncios = this.getVolume(listaEstoque);
+
+        if(capacidadeDoSetor - volumeTotalDaEntradaDeAnuncios >= 0){
+            saveListaEstoque(listaEstoque, ordemEntradaSalva, setor);
+        } else {
+            throw new RuntimeException("Setor não tem volume suficiente para alocar o estoque");
+        }
 
         List<Estoque> estoqueCadastrado = this.estoqueRepository.findAllEstoque(ordemEntradaSalva);
         return EstoqueDTO.converte(estoqueCadastrado);
@@ -66,19 +75,29 @@ public class OrdemEntradaService {
 
         // SALVO O ESTOQUE
         Set<EstoqueDTO> listaEstoque = inboundOrderDTO.getListaEstoqueDTO();
-        saveListaEstoque(listaEstoque, ordemEntradaSalva, setor);
+        Double capacidadeDoSetor = this.getCapacidadeSetor(ordemEntrada.getSetor().getId()).getVolume();
+        Double volumeTotalDaEntradaDeAnuncios = this.getVolume(listaEstoque);
+
+        if(capacidadeDoSetor - volumeTotalDaEntradaDeAnuncios >= 0){
+            saveListaEstoque(listaEstoque, ordemEntradaSalva, setor);
+        } else {
+            throw new RuntimeException("Setor não tem volume suficiente para alocar o estoque");
+        }
 
         return InboundOrderDTO.converte(ordemEntradaSalva);
     }
 
+    public CapacidadeSetor getCapacidadeSetor(Long setorId){
+        return this.setorRepository.getCapacidadeSetorById(setorId);
+    }
 
-    //---------------------//
-    // MÉTODOS AUXILIARES //
-    //---------------------//
+
+    // ----------------------- //
+    // MÉTODOS DE PERSISTÊNCIA //
+    // ----------------------- //
 
     public OrdemEntrada getOrdemById(Long id) {
-        OrdemEntrada ordemEntrada = this.ordemEntradaRepository.findById(id).orElse(new OrdemEntrada());
-        return ordemEntrada;
+        return this.ordemEntradaRepository.findById(id).orElse(new OrdemEntrada());
     }
 
     private OrdemEntrada saveOrdemEntrada(OrdemEntrada ordemEntrada) throws BusinessException {
@@ -105,15 +124,19 @@ public class OrdemEntradaService {
         } else {
             throw new RuntimeException("Setor inválido");
         }
+    }
 
-        //VALIDAR O ESPACO DISPONIVEL DO SETOR
-        /*
-        Collection<VolumeEstoqueAtualizado>  tupla = this.ordemEntradaRepository.findAllSetor();
-        System.out.println();
-        tupla.forEach((setor1 -> {
-            System.out.println(setor1.toString());
-        }));
-         */
 
+    // ------------------ //
+    // MÉTODOS AUXILIARES //
+    // ------------------ //
+
+    private double getVolume(Set<EstoqueDTO> listaEstoque){
+        double volumeTotal = 0.0;
+        for (EstoqueDTO estoque : listaEstoque) {
+            Anuncio anuncio = this.anuncioRepository.getById(estoque.getAnuncio_id());
+            volumeTotal += anuncio.getVolume() * estoque.getQuantidadeAtual();
+        }
+        return volumeTotal;
     }
 }

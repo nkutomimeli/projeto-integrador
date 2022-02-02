@@ -1,6 +1,6 @@
 package com.example.demo.interfaces;
 
- public interface VolumeEstoqueDisponivel{
+ public interface CapacidadeSetor {
     String getNome();
     Double getVolume();
 }

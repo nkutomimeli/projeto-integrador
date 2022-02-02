@@ -1,10 +1,5 @@
 package exception;
 
-import org.hibernate.HibernateException;
-
-import javax.validation.ConstraintViolationException;
-import java.sql.SQLException;
-
 public class BusinessException extends Exception {
 
     private static final long serialVersionUID = 2201800548165425255L;
