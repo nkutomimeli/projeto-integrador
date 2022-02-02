@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import com.example.demo.enums.Tipos;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -37,7 +38,8 @@ public class Anuncio {
 
     @OneToMany(mappedBy="anuncio")
     @ToString.Exclude
-    @JsonBackReference
+//    @JsonBackReference
+    @JsonIgnoreProperties("anuncio")
     private Set<Estoque> estoques;
 
     @OneToMany(mappedBy="anuncio")

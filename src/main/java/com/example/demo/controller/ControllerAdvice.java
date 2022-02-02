@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.AnunciosVaziosException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -48,5 +49,16 @@ public class ControllerAdvice {
         return ResponseEntity.badRequest().body("Houve erro ao tentar serializar um campo.");
     }
 
+
+    /**
+     * O handler usado para tratar a listagem de anúncios vazia.
+     * @param ex (AnunciosVaziosException)
+     * @param request (WebRequest)
+     * @return HTTPResponse 404 com a mensagem de erro (String)
+     */
+    @ExceptionHandler(AnunciosVaziosException.class)
+    protected ResponseEntity<Object> handleAnunciosVaziosException(AnunciosVaziosException ex, WebRequest request) {
+        return ResponseEntity.notFound().build();
+    }
 
 }

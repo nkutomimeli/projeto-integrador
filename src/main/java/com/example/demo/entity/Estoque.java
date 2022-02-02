@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -21,7 +22,8 @@ public class Estoque {
 
     @ManyToOne
     @ToString.Exclude
-    @JsonManagedReference
+//    @JsonManagedReference
+    @JsonIgnoreProperties("estoques")
     @JoinColumn(name="anuncio_id")
     private Anuncio anuncio;
 
