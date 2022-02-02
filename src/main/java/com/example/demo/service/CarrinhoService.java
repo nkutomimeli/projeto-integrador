@@ -33,6 +33,9 @@ public class CarrinhoService {
 
     public PrecoTotalDTO save(CarrinhoDTO carrinhoDTO) {
 
+        carrinhoDTO.getListaAnuncio().forEach(( item -> {
+            Long idResultante = this.anuncioRepository.findAnuncioByIdStockAndDateValid(item.getAnuncio_id(), item.getQuantidade());
+        }));
 
         // Salva o Carrinho no banco de dados
         Comprador comprador = this.compradorRepository.findById(carrinhoDTO.getComprador_id()).orElse(new Comprador());
@@ -76,5 +79,15 @@ public class CarrinhoService {
             this.itemCarrinhoRepository.save(ItemCarrinhoDTO.converte(item, anuncio, carrinhoSalvo));
         }));
         return CarrinhoDTO.converte(carrinhoSalvo);
+    }
+
+    private Boolean checkStockAndExpirationDate(CarrinhoDTO dto, Long id, Integer quantidade) {
+        for (ItemCarrinhoDTO item : dto.getListaAnuncio()) {
+            Long idResultante = this.anuncioRepository.findAnuncioByIdStockAndDateValid(id, quantidade);
+            if(idResultante == null) {
+                return false;
+            }
+        }
+        return true;
     }
 }
