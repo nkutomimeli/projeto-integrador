@@ -31,9 +31,9 @@ Insert into armazem (nome, CEP) values ('CD_Louveira', '00100-100');
 Insert into representante (armazem_id, nome) values (1, 'Ismael');
 
 -- Inserção de setor
-Insert into setor (armazem_id, nome, volume) values (1, 'FRESCO', 1000);
-Insert into setor (armazem_id, nome, volume) values (1, 'REFRIGERADO', 1000);
-Insert into setor (armazem_id, nome, volume) values (1, 'CONGELADO', 1000);
+Insert into setor (armazem_id, nome, volume) values (1, 'Fresco', 1000);
+Insert into setor (armazem_id, nome, volume) values (1, 'Refrigerado', 1000);
+Insert into setor (armazem_id, nome, volume) values (1, 'Congelado', 1000);
 
 -- Inserção de ordem_entrada
 Insert into ordem_entrada (setor_id, data_criacao) values (1, '2022-01-27 11:00:00');

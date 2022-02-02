@@ -34,7 +34,7 @@ public class Anuncio {
     private Double volume; // em m3
     private Double temperaturaMaxima;
     private Double temperaturaMinima;
-    private Tipos tipo; // ENUM  CONGELADO (1, "Congelado"), REFRIGERADO (2, "Refrigerado"), FRESCO  (3, "Fresco");
+    private Tipos tipo; // ENUM  (FRESCO  (0, "Fresco"); REFRIGERADO (1, "Refrigerado"), 2, "Congelado"),
 
     @OneToMany(mappedBy="anuncio")
     @ToString.Exclude
