@@ -3,11 +3,14 @@ package com.example.demo.dto;
 import com.example.demo.entity.Anuncio;
 import com.example.demo.entity.Estoque;
 import com.example.demo.entity.OrdemEntrada;
+import jdk.jfr.Period;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,15 +21,28 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Validated
 public class EstoqueDTO {
 
     private Long id;
+    @NotNull(message = "Anuncio em branco, favor fornecê-lo!")
+    @Min(value = 1, message = "Favor informar o id de um anuncio válido!")
     private Long anuncio_id;
+    @Null(message = "Campo apenas de resposta")
     private Long ordem_entrada_id;
+    @NotNull(message = "Quantidade inicial em branco, favor fornecê-la!")
+    @Min(value = 1, message = "Favor informar uma quantidade inicial maior que zero.")
     private Integer quantidadeInicial;
+    @NotNull(message = "Quantidade atual em branco, favor fornecê-la!")
+    @Min(value = 1, message = "Favor informar uma quantidade atual maior que zero.")
     private Integer quantidadeAtual;
+    @NotNull(message = "Temperatura atual em branco, favor fornecê-la!")
     private Double temperaturaAtual;
+    @NotNull(message = "Data de valida em branco, favor fornecê-la!")
+    @Future(message = "So permitido data futura para validade.")
     private LocalDate dataValidade;
+    @NotNull(message = "Data de produção em branco, favor fornecê-la!")
+    @PastOrPresent(message = "Informe uma data de produçao inferior ou igual a data atual.")
     private LocalDateTime dataProducao;
 
     public static Estoque converte(EstoqueDTO dto, Anuncio anuncio, OrdemEntrada ordemEntrada) {

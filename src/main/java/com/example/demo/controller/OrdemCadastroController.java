@@ -33,7 +33,7 @@ public class OrdemCadastroController {
     }
 
     @GetMapping("/inboundorder/{id}")
-    public ResponseEntity<OrdemEntrada> getEstoque(@Valid @PathVariable Long id) {
+    public ResponseEntity<OrdemEntrada> getEstoque(@PathVariable Long id) {
         OrdemEntrada ordemEntrada = ordemEntradaService.getOrdemById(id);
         return ResponseEntity.status(HttpStatus.OK).body(ordemEntrada);
     }
