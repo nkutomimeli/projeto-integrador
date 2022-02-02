@@ -55,13 +55,39 @@ Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidad
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (7, 7, 350, 350, -5, '2022-11-17', '2022-01-25 22:15:00');
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (8, 8, 500, 500, 7, '2022-12-10', '2022-01-27 16:44:00');
 
--- Inserção de comprador
--- Insert into estoque (nome, usernome, senha) values ('Fernado ventura', 'fernado', '123456');
--- Insert into estoque (nome, usernome, senha) values ('Marcos algusto', 'marcos', '123456');
--- Insert into estoque (nome, usernome, senha) values ('Maria ferreira', 'maria', '123456');
--- Insert into estoque (nome, usernome, senha) values ('Carlos henrique', 'carlos', '123456');
--- Insert into estoque (nome, usernome, senha) values ('Constatino algunsto', 'constatino', '123456');
--- insert into estoque (nome, usernome, senha) values ('Camila pitanga', 'fernado', '123456');
--- Insert into estoque (nome, usernome, senha) values ('Toni ferreira', 'toni', '123456');
--- Insert into estoque (nome, usernome, senha) values ('Algusto ventura', 'algusto', '123456');
--- Insert into estoque (nome, usernome, senha) values ('Ventura ferreira', 'ventura', '123456');
+--Inserção de comprador
+Insert into comprador (nome, usernome, senha) values ('Fernado ventura', 'fernado', '123456');
+Insert into comprador (nome, usernome, senha) values ('Marcos algusto', 'marcos', '123456');
+Insert into comprador (nome, usernome, senha) values ('Maria ferreira', 'maria', '123456');
+Insert into comprador (nome, usernome, senha) values ('Carlos henrique', 'carlos', '123456');
+Insert into comprador (nome, usernome, senha) values ('Constatino algunsto', 'constatino', '123456');
+Insert into comprador (nome, usernome, senha) values ('Camila pitanga', 'fernado', '123456');
+Insert into comprador (nome, usernome, senha) values ('Toni ferreira', 'toni', '123456');
+Insert into comprador (nome, usernome, senha) values ('Algunsto ventura', 'algusto', '123456');
+Insert into comprador (nome, usernome, senha) values ('ventura ferreira', 'ventura', '123456');
+
+--Inserção de Carrinho_comprador
+Insert into carrinho (comprador_id, localdate) values (1, '2022-01-15');
+Insert into carrinho (comprador_id, localdate) values (1, '2022-01-25');
+Insert into carrinho (comprador_id, localdate) values (1, '2022-01-30');
+Insert into carrinho (comprador_id, localdate) values (2, '2021-01-10');
+Insert into carrinho (comprador_id, localdate) values (2, '2022-01-15');
+Insert into carrinho (comprador_id, localdate) values (3, '2021-02-15');
+Insert into carrinho (comprador_id, localdate) values (3, '2022-01-10');
+Insert into carrinho (comprador_id, localdate) values (4, '2021-02-15');
+Insert into carrinho (comprador_id, localdate) values (5, '2021-02-25');
+Insert into carrinho (comprador_id, localdate) values (6, '2021-02-15');
+
+
+--Inserção de Item_carrinho
+Insert into itemcarrinho (anuncio_id, carrinho_id, quantidade, preco) values (1, 1, 10, 5);
+Insert into itemcarrinho (anuncio_id, carrinho_id, quantidade, preco) values (1, 1, 12, 12);
+Insert into itemcarrinho (anuncio_id, carrinho_id, quantidade, preco) values (2, 1, 10, 12);
+Insert into itemcarrinho (anuncio_id, carrinho_id, quantidade, preco) values (2, 1, 4, 12);
+Insert into itemcarrinho (anuncio_id, carrinho_id, quantidade, preco) values (3, 1, 15, 7);
+Insert into itemcarrinho (anuncio_id, carrinho_id, quantidade, preco) values (3, 1, 10, 7);
+Insert into itemcarrinho (anuncio_id, carrinho_id, quantidade, preco) values (3, 1, 22, 7);
+Insert into itemcarrinho (anuncio_id, carrinho_id, quantidade, preco) values (3, 1, 11, 7);
+Insert into itemcarrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 12, 23);
+Insert into itemcarrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 12, 23);
+Insert into itemcarrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 15, 23);
