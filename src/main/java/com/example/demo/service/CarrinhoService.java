@@ -14,7 +14,7 @@ import com.example.demo.repository.ItemCarrinhoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class CarrinhoService {
@@ -33,14 +33,15 @@ public class CarrinhoService {
 
     public PrecoTotalDTO save(CarrinhoDTO carrinhoDTO) {
 
+
         // Salva o Carrinho no banco de dados
         Comprador comprador = this.compradorRepository.findById(carrinhoDTO.getComprador_id()).orElse(new Comprador());
         Carrinho carrinho = CarrinhoDTO.converte(carrinhoDTO, comprador);
         Carrinho carrinhoSalvo = this.carrinhoRepository.save(carrinho);
 
-        // Salva o ItemCarrinho
+        // Salva o ItemCarrinho no banco de dados
 
-        List<ItemCarrinhoDTO> listaItemCarrinho = carrinhoDTO.getListaAnuncio();
+        Set<ItemCarrinhoDTO> listaItemCarrinho = carrinhoDTO.getListaAnuncio();
         listaItemCarrinho.forEach((item -> {
             Anuncio anuncio = this.anuncioRepository.findById(item.getAnuncio_id()).orElse(new Anuncio());
             ItemCarrinho itemCarrinho = ItemCarrinhoDTO.converte(item, anuncio, carrinhoSalvo);
@@ -54,10 +55,26 @@ public class CarrinhoService {
     }
 
     public CarrinhoDTO getCarrinhoById(Long id) {
-        return null;
+
+        Carrinho carrinho = this.carrinhoRepository.findById(id).orElse(new Carrinho());
+        return CarrinhoDTO.converte(carrinho);
     }
 
     public CarrinhoDTO update(CarrinhoDTO carrinhoDTO, Long id) {
-        return null;
+
+        // Atualiza o Carrinho no banco de dados
+        Carrinho carrinho = this.carrinhoRepository.findById(id).orElse(new Carrinho());
+        Carrinho carrinhoSalvo = this.carrinhoRepository.save(carrinho);
+
+        // Atualiza o ItemCarrinho no banco de dados
+        Set<ItemCarrinhoDTO> listaItemCarrinho = carrinhoDTO.getListaAnuncio();
+        listaItemCarrinho.forEach((item -> {
+            ItemCarrinho itemCarrinho = this.itemCarrinhoRepository.findById(item.getId()).orElse(new ItemCarrinho());
+            Anuncio anuncio = this.anuncioRepository.findById(item.getAnuncio_id()).orElse(new Anuncio());
+            itemCarrinho.setCarrinho(carrinhoSalvo);
+            itemCarrinho.setAnuncio(anuncio);
+            this.itemCarrinhoRepository.save(ItemCarrinhoDTO.converte(item, anuncio, carrinhoSalvo));
+        }));
+        return CarrinhoDTO.converte(carrinhoSalvo);
     }
 }

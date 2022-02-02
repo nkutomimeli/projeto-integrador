@@ -34,6 +34,4 @@ public class CarrinhoController {
         CarrinhoDTO carrinho = carrinhoService.update(carrinhoDTO, id);
         return ResponseEntity.status(HttpStatus.CREATED).body(carrinho);
     }
-
-
 }

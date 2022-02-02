@@ -6,19 +6,20 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum Status {
-    CART (0, "Cart");
+    ABERTO (0, "Aberto"),
+    FINALIZADO (1, "Finalizado");
 
     private int codigo;
     private String descricao;
 
-    public static Tipos toEnum(Integer codigo) {
+    public static Status toEnum(Integer codigo) {
         if (codigo == null) {
             return null;
         }
 
-        for (Tipos t: Tipos.values()) {
-            if (codigo.equals(t.getCodigo())) {
-                return t;
+        for (Status s: Status.values()) {
+            if (codigo.equals(s.getCodigo())) {
+                return s;
             }
         }
 
