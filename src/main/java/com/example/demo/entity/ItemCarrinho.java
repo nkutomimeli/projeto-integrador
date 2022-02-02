@@ -21,6 +21,6 @@ public class ItemCarrinho {
     @ManyToOne
     @JoinColumn(name="carrinho_id", nullable=false)
     private Carrinho carrinho;
-    private Long quantidade;
+    private Integer quantidade;
     private BigDecimal preco;
 }

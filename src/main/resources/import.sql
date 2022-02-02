@@ -55,3 +55,7 @@ Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidad
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (7, 7, 350, 350, -5, '2022-11-17', '2022-01-25 22:15:00');
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (8, 8, 500, 500, 7, '2022-12-10', '2022-01-27 16:44:00');
 
+-- Inserção de compradores
+Insert into comprador (nome, username, senha) values ('Vanessa', 'VanessaGomes', 'vanessa123@');
+Insert into comprador (nome, username, senha) values ('Iohara', 'IoharaPereira', 'iohara123@');
+Insert into comprador (nome, username, senha) values ('Jose', 'JoseIsmael', 'Jose123@');

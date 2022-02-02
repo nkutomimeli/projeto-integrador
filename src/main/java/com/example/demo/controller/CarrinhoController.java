@@ -1,23 +1,21 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.EstoqueDTO;
-import com.example.demo.dto.InboundOrderDTO;
-import com.example.demo.entity.Carrinho;
-import com.example.demo.entity.OrdemEntrada;
+import com.example.demo.dto.CarrinhoDTO;
+import com.example.demo.dto.PrecoTotalDTO;
+import com.example.demo.service.CarrinhoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/fresh-products")
 public class CarrinhoController {
 
-//    @Autowired
-//    private CarrinhoService carrinhoService;
+    @Autowired
+    private CarrinhoService carrinhoService;
 
     @PostMapping("/orders")
     public ResponseEntity<PrecoTotalDTO> criarCarrinho(@Valid @RequestBody CarrinhoDTO carrinhoDTO) {
