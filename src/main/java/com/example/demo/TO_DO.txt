@@ -1,0 +1,25 @@
+VALIDAÇÕES
+
+1 - VALIDAR SETOR --> OK!
+2 - VALIDAR SETOR CORRESPONDENTE AO TIPO PRODUTO --> OK!
+3 - VALIDAR ESPACO DO SETOR --> FALTANDO
+
+TODO:
+1 - VALIDAR ARMAZÉM -> Existe ? JWT ?
+2 - VALIDAR REPRESENTANTE PERTENCE AO ARMAZEM ? JWT ?
+
+
+
+
+
+CENÁRIO 1: O produto de um vendedor é registrado.
+
+E que o armazém é válido
+E que o representante pertence ao armazém
+E que o setor é válido
+E que o setor corresponde ao tipo de produto
+E que o setor tenha espaço disponível
+QUANDO o representante entra no lote
+ENTÃO o registro de compra é criado
+E o lote é atribuído a um setor
+E o representante é associado ao registro de estoque

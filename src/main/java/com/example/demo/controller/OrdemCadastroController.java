@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.EstoqueDTO;
 import com.example.demo.dto.InboundOrderDTO;
 import com.example.demo.entity.OrdemEntrada;
+import com.example.demo.interfaces.CapacidadeSetor;
 import com.example.demo.service.OrdemEntradaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class OrdemCadastroController {
 
     @PutMapping("/inboundorder/{id}")
     public ResponseEntity<InboundOrderDTO> atualizaEstoque(@Valid @RequestBody InboundOrderDTO inboundOrderDTO, @PathVariable Long id) {
-        InboundOrderDTO ordemEntradaAtualizada = ordemEntradaService.atualiza(inboundOrderDTO, id);
+        InboundOrderDTO ordemEntradaAtualizada = ordemEntradaService.update(inboundOrderDTO, id);
         return ResponseEntity.status(HttpStatus.CREATED).body(ordemEntradaAtualizada);
     }
 
@@ -35,6 +36,12 @@ public class OrdemCadastroController {
     public ResponseEntity<OrdemEntrada> getEstoque(@PathVariable Long id) {
         OrdemEntrada ordemEntrada = ordemEntradaService.getOrdemById(id);
         return ResponseEntity.status(HttpStatus.OK).body(ordemEntrada);
+    }
+
+    @GetMapping("/capacidadeSetor/{setorId}")
+    public ResponseEntity<CapacidadeSetor> getCapacidadeSetores(@Valid @PathVariable Long setorId) {
+        CapacidadeSetor capacidadeSetores = ordemEntradaService.getCapacidadeSetor(setorId);
+        return ResponseEntity.status(HttpStatus.OK).body(capacidadeSetores);
     }
 
 }

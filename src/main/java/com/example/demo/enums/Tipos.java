@@ -7,9 +7,9 @@ import lombok.Getter;
 @Getter
 public enum Tipos {
 
-    FRESCO (1, "Fresco"),
-    REFRIGERADO (2, "Refrigerado"),
-    CONGELADO (3, "Congelado");
+    FRESCO (0, "Fresco"),
+    REFRIGERADO (1, "Refrigerado"),
+    CONGELADO (2, "Congelado");
 
     private int codigo;
     private String descricao;
