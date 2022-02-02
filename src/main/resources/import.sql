@@ -90,4 +90,4 @@ Insert into itemcarrinho (anuncio_id, carrinho_id, quantidade, preco) values (3,
 Insert into itemcarrinho (anuncio_id, carrinho_id, quantidade, preco) values (3, 1, 11, 7);
 Insert into itemcarrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 12, 23);
 Insert into itemcarrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 12, 23);
-Insert into itemcarrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 15, 23);
+

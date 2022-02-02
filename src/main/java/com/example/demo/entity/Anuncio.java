@@ -15,7 +15,8 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Data
+@Setter
+@Getter
 public class Anuncio {
 
     @Id
