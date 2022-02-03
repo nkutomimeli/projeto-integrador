@@ -6,6 +6,8 @@ import com.example.demo.enums.Status;
 import lombok.*;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -17,9 +19,15 @@ import java.util.Set;
 @Validated
 public class CarrinhoDTO {
 
+    @PastOrPresent(message = "Informe uma data de criacao inferior ou igual a data atual.")
     private LocalDateTime dataCriacao;
+    @NotNull(message = "Comprador em branco, favor fornecê-lo!")
     private Long comprador_id;
+    @NotNull(message = "Status vazio, favor fornecê-la!")
     private Status status;
+    @Valid
+    @NotEmpty(message = "Favor adicionar itens ao carrinho")
+    @NotNull(message = "Favor adicionar itens ao carrinho")
     private Set<ItemCarrinhoDTO> listaAnuncio;
 
     public static Carrinho converte(CarrinhoDTO dto, Comprador comprador) {
