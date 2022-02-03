@@ -10,8 +10,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
 
+//@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

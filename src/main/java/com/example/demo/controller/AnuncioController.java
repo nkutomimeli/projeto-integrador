@@ -25,11 +25,17 @@ public class AnuncioController {
         return ResponseEntity.status(HttpStatus.OK).body(listaAnuncios);
     }
 
-    @GetMapping("/list") // ?querytype=FRESCO
-    public ResponseEntity<List<Anuncio>> listAnunciosPorTipo(@RequestParam("querytype") Tipos categoria) {
-        System.out.println(categoria);
+    @GetMapping("/list") // ?categoria=FRESCO
+    public ResponseEntity<List<Anuncio>> listAnunciosPorTipo(@RequestParam("categoria") Tipos categoria) {
         List<Anuncio> listaAnuncios = anuncioService.listAnunciosByCategory(categoria);
         return ResponseEntity.status(HttpStatus.OK).body(listaAnuncios);
+    }
+
+//    @GetMapping("/list") // ?anuncio_id=FRESCO
+    @GetMapping("/list/anuncio/{anuncio_id}") // /anuncio/1
+    public ResponseEntity<Anuncio> getAnuncioPorId(@PathVariable("anuncio_id") Long anuncioId) {
+        Anuncio anuncio = anuncioService.getAnuncioById(anuncioId);
+        return ResponseEntity.status(HttpStatus.OK).body(anuncio);
     }
 
 }

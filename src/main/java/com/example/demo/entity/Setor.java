@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,7 +11,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Setor {
 
     @Id
@@ -19,12 +19,14 @@ public class Setor {
 
     @ManyToOne
     @JoinColumn(name="armazem_id") // insertable = false, updatable = false)
+    @JsonIgnoreProperties("setors")
     private Armazem armazem;
 
     private String nome; // CONGELADO, REFRIGERADO, FRESCO
     private Double volume;
 
     @OneToMany(mappedBy="setor")
+    @JsonIgnoreProperties(value = {"setor", "anuncio"})
     private Set<OrdemEntrada> ordemEntradas;
 
 }

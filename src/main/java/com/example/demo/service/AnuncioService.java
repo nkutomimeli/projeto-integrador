@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Data
@@ -47,5 +48,13 @@ public class AnuncioService {
         List<Anuncio> anuncios = this.anuncioRepository.findAllAnunciosByCategoryWithStockAndDueDateValid(dataValidadeMais3Semanas, categoria);
         if (anuncios.isEmpty()) throw new AnunciosVaziosException("Nenhum anúncio encontrado.");
         return anuncios;
+    }
+
+    public Anuncio getAnuncioById(Long anuncioId) {
+        // Pega o Anúncio pelo seu ID
+
+        Optional<Anuncio> anuncioOptional = this.anuncioRepository.findById(anuncioId);
+        if (anuncioOptional.isEmpty()) throw new AnunciosVaziosException("Nenhum anúncio encontrado.");
+        return anuncioOptional.get();
     }
 }

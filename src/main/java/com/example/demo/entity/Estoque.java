@@ -1,10 +1,10 @@
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.example.demo.utils.View;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
+import javax.annotation.security.PermitAll;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -30,8 +30,10 @@ public class Estoque {
     @ManyToOne
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @JsonBackReference
+//    @JsonBackReference
+    @JsonIgnoreProperties("estoques")
     @JoinColumn(name="ordem_entrada_id")
+    @JsonView({View.Representante.class, View.Admin.class})
     private OrdemEntrada ordemEntrada;
 
 
