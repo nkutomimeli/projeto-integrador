@@ -27,7 +27,6 @@ public class AnuncioController {
 
     @GetMapping("/list") // ?querytype=FRESCO
     public ResponseEntity<List<Anuncio>> listAnunciosPorTipo(@RequestParam("querytype") Tipos categoria) {
-        System.out.println(categoria);
         List<Anuncio> listaAnuncios = anuncioService.listAnunciosByCategory(categoria);
         return ResponseEntity.status(HttpStatus.OK).body(listaAnuncios);
     }
