@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "7f1fa0b8-d638-40c8-86e5-18e4d3a62886",
+		"name": "Projeto Integrado",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Ordem Entrada Payload",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "string"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"ordemEntradaDTO\": {\n    \"dataCriacao\": \"2022-01-27T10:27:58.331085\",\n    \"setor_id\": 1\n  },\n  \"listaEstoqueDTO\": [\n      {\n        \"anuncio_id\": 2,\n        \"quantidadeInicial\": 2,\n        \"quantidadeAtual\": 3,\n        \"temperaturaAtual\": 4.0,\n        \"dataValidade\": \"2022-01-27\",\n        \"dataProducao\": \"2022-01-27T10:27:58.331085\"\n      }\n  ]\n}"
+				},
+				"url": "localhost:8080/api/v1/fresh-products/inboundorder"
+			},
+			"response": []
+		},
+		{
+			"name": "Carrinho Payload",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "string"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"dataCriacao\": \"2022-01-27T10:27:58.331085\",\n  \"comprador_id\": 1,\n  \"status\": 0,\n  \"listaAnuncio\": [\n    {\n      \"anuncio_id\": 1,\n      \"quantidade\": 2\n    },\n    {\n      \"anuncio_id\": 2,\n      \"quantidade\": 1\n    }\n  ]\n}"
+				},
+				"url": "localhost:8080/api/v1/fresh-products/orders"
+			},
+			"response": []
+		},
+		{
+			"name": "Carrinho Payload",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "string"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"dataCriacao\": \"2022-01-27T10:27:58.331085\",\n  \"comprador_id\": 1,\n  \"status\": 1,\n  \"listaAnuncio\": [\n    {\n      \"id\": 1,\n      \"anuncio_id\": 1,\n      \"quantidade\": 2\n    },\n    {\n      \"id\": 2,\n      \"anuncio_id\": 2,\n      \"quantidade\": 1\n    }\n  ]\n}"
+				},
+				"url": "localhost:8080/api/v1/fresh-products/orders/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Carrinho Get By Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "string"
+					}
+				],
+				"url": "localhost:8080/api/v1/fresh-products/orders/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Ordem Entrada Payload",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "string"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"ordemEntradaDTO\": {\n    \"dataCriacao\": \"2022-01-27T10:27:58.331085\",\n    \"setor_id\": 2\n  },\n  \"listaEstoqueDTO\": [\n      {\n        \"anuncio_id\": 2,\n        \"quantidadeInicial\": 2,\n        \"quantidadeAtual\": 3,\n        \"temperaturaAtual\": 4.0,\n        \"dataValidade\": \"2022-01-27\",\n        \"dataProducao\": \"2022-01-27T10:27:58.331085\"\n      }\n  ]\n}"
+				},
+				"url": "localhost:8080/api/v1/fresh-products/inboundorder/9"
+			},
+			"response": []
+		}
+	]
+}

@@ -11,7 +11,8 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Data
+@Getter
+@Setter
 public class Carrinho {
 
     @Id
