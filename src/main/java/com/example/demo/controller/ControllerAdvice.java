@@ -27,13 +27,6 @@ public class ControllerAdvice {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
-/**
- * Classe que captura e lida com exceções prédeterminadas dando um tratamento
- * personalizado
- * */
-@RestControllerAdvice
-public class ControllerAdvice {
-
     /**
      * O handler usado para tratar as validações nos DTOs
      * @param ex (MethodArgumentNotValidException)
