@@ -47,6 +47,8 @@ Insert into ordem_entrada (setor_id, data_criacao) values (2, '2022-02-03 14:00:
 
 -- Inserção de estoques
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (1, 1, 1000, 1000, 20, '2022-02-15', '2022-01-27 11:00:00');
+Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (1, 1, 1000, 1000, 20, '2022-02-10', '2022-01-27 11:00:00');
+Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (1, 1, 1000, 1000, 20, '2022-03-01', '2022-01-27 11:00:00');
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (2, 2, 100, 100, 10, '2022-10-27', '2022-01-25 12:10:00');
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (3, 3, 800, 800, 18, '2022-02-20', '2022-01-24 08:03:00');
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (4, 4, 500, 500, -3, '2022-10-20', '2022-01-25 15:55:00');

@@ -14,7 +14,7 @@ public interface EstoqueRepository extends JpaRepository <Estoque, Long> {
     @Query("SELECT e FROM Estoque e where e.ordemEntrada = ?1")
     List<Estoque> findAllEstoque(OrdemEntrada ordemEntrada);
 
-    @Query("SELECT e FROM Estoque e where e.anuncio = ?1")
-    List<Estoque> findAllAnuncio(Anuncio anuncio);
+    @Query(value = "select * from estoque where anuncio_id = ?1", nativeQuery = true)
+    List<Estoque> findAllAnuncio(Long anuncio_id);
 
 }

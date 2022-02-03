@@ -3,18 +3,13 @@ package com.example.demo.service;
 import com.example.demo.dto.CarrinhoDTO;
 import com.example.demo.dto.ItemCarrinhoDTO;
 import com.example.demo.dto.PrecoTotalDTO;
-import com.example.demo.entity.Anuncio;
-import com.example.demo.entity.Carrinho;
-import com.example.demo.entity.Comprador;
-import com.example.demo.entity.ItemCarrinho;
-import com.example.demo.repository.AnuncioRepository;
-import com.example.demo.repository.CarrinhoRepository;
-import com.example.demo.repository.CompradorRepository;
-import com.example.demo.repository.ItemCarrinhoRepository;
+import com.example.demo.entity.*;
+import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.*;
 
 @Service
 public class CarrinhoService {
@@ -31,11 +26,14 @@ public class CarrinhoService {
     @Autowired
     ItemCarrinhoRepository itemCarrinhoRepository;
 
-    public PrecoTotalDTO save(CarrinhoDTO carrinhoDTO) {
+    @Autowired
+    EstoqueRepository estoqueRepository;
 
-        carrinhoDTO.getListaAnuncio().forEach(( item -> {
-            Long idResultante = this.anuncioRepository.findAnuncioByIdStockAndDateValid(item.getAnuncio_id(), item.getQuantidade());
-        }));
+    public PrecoTotalDTO save(CarrinhoDTO carrinhoDTO) {
+        // Faz validação da quantidade de estoque e data de validade
+        if(!checkStockAndExpirationDate(carrinhoDTO)) {
+            throw new RuntimeException("Estoque insuficiente ou validade a expirar");
+        }
 
         // Salva o Carrinho no banco de dados
         Comprador comprador = this.compradorRepository.findById(carrinhoDTO.getComprador_id()).orElse(new Comprador());
@@ -48,6 +46,7 @@ public class CarrinhoService {
         listaItemCarrinho.forEach((item -> {
             Anuncio anuncio = this.anuncioRepository.findById(item.getAnuncio_id()).orElse(new Anuncio());
             ItemCarrinho itemCarrinho = ItemCarrinhoDTO.converte(item, anuncio, carrinhoSalvo);
+            decreaseStock(item.getAnuncio_id(), item.getQuantidade());
             this.itemCarrinhoRepository.save(itemCarrinho);
         }));
 
@@ -58,12 +57,16 @@ public class CarrinhoService {
     }
 
     public CarrinhoDTO getCarrinhoById(Long id) {
-
+        // Retorna Carrinho pelo id
         Carrinho carrinho = this.carrinhoRepository.findById(id).orElse(new Carrinho());
         return CarrinhoDTO.converte(carrinho);
     }
 
     public CarrinhoDTO update(CarrinhoDTO carrinhoDTO, Long id) {
+        // Faz validação da quantidade de estoque e data de validade
+        if(!checkStockAndExpirationDate(carrinhoDTO)) {
+            throw new RuntimeException("Estoque insuficiente ou validade a expirar");
+        }
 
         // Atualiza o Carrinho no banco de dados
         Carrinho carrinho = this.carrinhoRepository.findById(id).orElse(new Carrinho());
@@ -76,18 +79,35 @@ public class CarrinhoService {
             Anuncio anuncio = this.anuncioRepository.findById(item.getAnuncio_id()).orElse(new Anuncio());
             itemCarrinho.setCarrinho(carrinhoSalvo);
             itemCarrinho.setAnuncio(anuncio);
+            decreaseStock(item.getAnuncio_id(), item.getQuantidade());
             this.itemCarrinhoRepository.save(ItemCarrinhoDTO.converte(item, anuncio, carrinhoSalvo));
         }));
         return CarrinhoDTO.converte(carrinhoSalvo);
     }
 
-    private Boolean checkStockAndExpirationDate(CarrinhoDTO dto, Long id, Integer quantidade) {
+    private Boolean checkStockAndExpirationDate(CarrinhoDTO dto) {
+        // Flag para verificar se existe anúncio que atenda a esses requisitos
         for (ItemCarrinhoDTO item : dto.getListaAnuncio()) {
-            Long idResultante = this.anuncioRepository.findAnuncioByIdStockAndDateValid(id, quantidade);
+            Long idResultante = this.anuncioRepository.findAnuncioByIdStockAndDateValid(item.getAnuncio_id(), item.getQuantidade());
             if(idResultante == null) {
                 return false;
             }
         }
         return true;
     }
+
+    private void decreaseStock(Long anuncio_id, Integer quantidade) {
+        // Decrementar estoque
+        LocalDate dataValidade = LocalDate.now().plusDays(21);
+        List<Estoque> listaEstoque = this.estoqueRepository.findAllAnuncio(anuncio_id);
+        listaEstoque.sort(Comparator.comparing(Estoque::getDataValidade));
+        listaEstoque.forEach((estoque -> {
+            if(estoque.getDataValidade().compareTo(dataValidade) >= 0 && estoque.getQuantidadeAtual() >= quantidade){
+                Integer quantidadeDecrementada = estoque.getQuantidadeAtual() - quantidade;
+                estoque.setQuantidadeAtual(quantidadeDecrementada);
+                this.estoqueRepository.save(estoque);
+            }
+        }));
+    }
 }
+
