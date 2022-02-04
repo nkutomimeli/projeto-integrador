@@ -2,11 +2,15 @@ package com.example.demo.entity;
 
 import javax.persistence.*;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 public class Perfil implements GrantedAuthority{
 
     private static final long serialVersionUID = 7497401423570420955L;
@@ -16,7 +20,7 @@ public class Perfil implements GrantedAuthority{
     private Long id;
     private String nome;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "perfil")
     private List<PerfilUsuario> perfisUsuarios;
 
     @Override

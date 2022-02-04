@@ -28,7 +28,7 @@ public class Usuario implements UserDetails{
     @Column(name="enabled")
     private boolean ativo;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "usuario")
     private List<PerfilUsuario> perfisUsuarios;
 
 
