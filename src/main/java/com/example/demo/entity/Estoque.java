@@ -31,7 +31,7 @@ public class Estoque {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
 //    @JsonBackReference
-    @JsonIgnoreProperties("estoques")
+    @JsonIgnoreProperties({"estoques"})
     @JoinColumn(name="ordem_entrada_id")
     @JsonView({View.Representante.class, View.Admin.class})
     private OrdemEntrada ordemEntrada;
@@ -43,4 +43,16 @@ public class Estoque {
     private LocalDate dataValidade;
     private LocalDateTime dataProducao;
 
+    public static Estoque newEstoque(Estoque e) {
+        return Estoque.builder()
+                .id(e.getId())
+                .anuncio(e.getAnuncio())
+                .ordemEntrada(e.getOrdemEntrada())
+                .quantidadeInicial(e.getQuantidadeInicial())
+                .quantidadeAtual(e.getQuantidadeAtual())
+                .temperaturaAtual(e.getTemperaturaAtual())
+                .dataValidade(e.getDataValidade())
+                .dataProducao(e.getDataProducao())
+                .build();
+    }
 }

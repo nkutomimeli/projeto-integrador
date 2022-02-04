@@ -30,6 +30,6 @@ public class OrdemEntrada {
     @OneToMany(mappedBy="ordemEntrada")
     @ToString.Exclude
 //    @JsonManagedReference
-    @JsonIgnoreProperties("ordemEntrada")
+    @JsonIgnoreProperties({"ordemEntrada"})
     private Set<Estoque> estoques;
 }

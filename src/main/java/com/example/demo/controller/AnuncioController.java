@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.AnuncioInternoDTO;
 import com.example.demo.entity.Anuncio;
 import com.example.demo.entity.OrdemEntrada;
 import com.example.demo.enums.Tipos;
@@ -33,9 +34,15 @@ public class AnuncioController {
 
 //    @GetMapping("/list") // ?anuncio_id=FRESCO
     @GetMapping("/list/anuncio/{anuncio_id}") // /anuncio/1
-    public ResponseEntity<Anuncio> getAnuncioPorId(@PathVariable("anuncio_id") Long anuncioId) {
-        Anuncio anuncio = anuncioService.getAnuncioById(anuncioId);
-        return ResponseEntity.status(HttpStatus.OK).body(anuncio);
+    public ResponseEntity<AnuncioInternoDTO> getAnuncioPorId(@PathVariable("anuncio_id") Long anuncioId) {
+        AnuncioInternoDTO anuncioInternoDTO = anuncioService.getAnuncioById(anuncioId);
+        return ResponseEntity.status(HttpStatus.OK).body(anuncioInternoDTO);
+    }
+
+    @GetMapping("/list/anuncio") // ?anuncio_id=1&orderBy=L
+    public ResponseEntity<AnuncioInternoDTO> getAnuncioPorIdOrdenados(@RequestParam("anuncioId") Long anuncioId, @RequestParam("orderBy") String orderBy ) {
+        AnuncioInternoDTO anuncioInternoDTO = anuncioService.getAnuncioByIdOrdered(anuncioId, orderBy);
+        return ResponseEntity.status(HttpStatus.OK).body(anuncioInternoDTO);
     }
 
 }
