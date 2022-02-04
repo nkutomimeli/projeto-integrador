@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -23,13 +24,12 @@ public class ArmazemService {
     private EstoqueRepository estoqueRepository;
 
     public List<ListaArmazemDTO> estoquePorArmazem (Long produto_id) {
+        List<ListaArmazemDTO> listaInterandoArmazem = new ArrayList<>();
         List<ListaArmazemInterface> estoqueList = this.estoqueRepository.getEstoqueByArmazem(produto_id);
         estoqueList.forEach((item -> {
-            System.out.println(item.getArmazem_id());
-            System.out.println(item.getTotalQuantidade());
+            ListaArmazemDTO result = new ListaArmazemDTO(item.getArmazem_id(), item.getTotalQuantidade());
+            listaInterandoArmazem.add(result);
         }));
-        System.out.println(estoqueList);
-        return null;
+        return listaInterandoArmazem;
     }
-
 }

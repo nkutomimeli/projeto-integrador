@@ -19,10 +19,10 @@ public class ArmazemDTO {
     private List<ListaArmazemDTO> listArmazem;
 
     /*
-    public static ArmazemDTO converte(Armazem armazem, Estoque estoque) {
+    public static ArmazemDTO converte(ListaArmazemDTO listaArmazemDTO, Estoque estoque) {
         return ArmazemDTO.builder()
                 .estoque_id(estoque.getId())
-                //.listArmazem(ListaArmazemDTO.converte(estoque.getQuantidadeAtual())
+                .listArmazem(listaArmazemDTO.getArmazem_id())
                 .build();
     }
      */
