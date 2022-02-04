@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -23,6 +24,11 @@ public class EstoqueService {
 
     public List<EstoqueSetorIdDataValidadeDTO> getEstoqueByDataValidadeCategoria(Long numeroDias, int categoria, String order) {
         LocalDate dataValidade = LocalDate.now().plusDays(numeroDias);
-        return EstoqueSetorIdDataValidadeDTO.converte(this.estoqueRepository.getEstoqueByDataValidadeCategoria(dataValidade, categoria, order));
+        List<Estoque> estoque = this.estoqueRepository.getEstoqueByDataValidadeCategoria(dataValidade, categoria);
+        estoque.sort(Comparator.comparing(Estoque::getDataValidade));
+        if(order.equals("desc")){
+            estoque.sort(Comparator.comparing(Estoque::getDataValidade).reversed());
+        }
+        return EstoqueSetorIdDataValidadeDTO.converte(estoque);
     }
 }
