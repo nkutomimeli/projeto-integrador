@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/anuncios").permitAll()
-                .antMatchers(HttpMethod.POST, "/auth").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/v1/fresh-products/auth").permitAll()
                 .antMatchers(HttpMethod.GET, "/vendas").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and().csrf().disable()
