@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.AnuncioExternoDTO;
 import com.example.demo.dto.AnuncioInternoDTO;
 import com.example.demo.entity.Anuncio;
 import com.example.demo.entity.OrdemEntrada;
@@ -21,14 +22,14 @@ public class AnuncioController {
     private AnuncioService anuncioService;
 
     @GetMapping("")
-    public ResponseEntity<List<Anuncio>> listAnuncios() {
-        List<Anuncio> listaAnuncios = anuncioService.listAnunciosValidos();
+    public ResponseEntity<List<AnuncioExternoDTO>> listAnuncios() {
+        List<AnuncioExternoDTO> listaAnuncios = anuncioService.listAnunciosValidos();
         return ResponseEntity.status(HttpStatus.OK).body(listaAnuncios);
     }
 
     @GetMapping("/list") // ?categoria=FRESCO
-    public ResponseEntity<List<Anuncio>> listAnunciosPorTipo(@RequestParam("categoria") Tipos categoria) {
-        List<Anuncio> listaAnuncios = anuncioService.listAnunciosByCategory(categoria);
+    public ResponseEntity<List<AnuncioExternoDTO>> listAnunciosPorTipo(@RequestParam("categoria") Tipos categoria) {
+        List<AnuncioExternoDTO> listaAnuncios = anuncioService.listAnunciosByCategory(categoria);
         return ResponseEntity.status(HttpStatus.OK).body(listaAnuncios);
     }
 

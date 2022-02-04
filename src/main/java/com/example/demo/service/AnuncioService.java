@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.AnuncioExternoDTO;
 import com.example.demo.dto.AnuncioInternoDTO;
 import com.example.demo.dto.EstoqueInternoDTO;
 import com.example.demo.entity.Anuncio;
@@ -31,24 +32,26 @@ public class AnuncioService {
 
     private EstoqueRepository estoqueRepository;
 
-    public List<Anuncio> listAnunciosValidos() {
+    public List<AnuncioExternoDTO> listAnunciosValidos() {
         // Listar todos os anúncios válidos com quantidade atual maior
         // que zero e validade de pelo menos 3 semanas
 
         LocalDate dataValidadeMais3Semanas = LocalDate.now().plusWeeks(3);
         List<Anuncio> anuncios = this.anuncioRepository.findAllAnunciosWithStockAndDueDateValid(dataValidadeMais3Semanas);
         if (anuncios.isEmpty()) throw new AnunciosVaziosException("Nenhum anúncio encontrado.");
-        return anuncios;
+        List<AnuncioExternoDTO> anunciosDTO = AnuncioExternoDTO.converte(anuncios);
+        return anunciosDTO;
     }
 
-    public List<Anuncio> listAnunciosByCategory(Tipos categoria) {
+    public List<AnuncioExternoDTO> listAnunciosByCategory(Tipos categoria) {
         // Listar todos os anúncios válidos com quantidade atual maior
         // que zero e validade de pelo menos 3 semanas, por categoria
         // FRESCO, REFRIGERADO ou CONGELADO
         LocalDate dataValidadeMais3Semanas = LocalDate.now().plusWeeks(3);
         List<Anuncio> anuncios = this.anuncioRepository.findAllAnunciosByCategoryWithStockAndDueDateValid(dataValidadeMais3Semanas, categoria);
         if (anuncios.isEmpty()) throw new AnunciosVaziosException("Nenhum anúncio encontrado.");
-        return anuncios;
+        List<AnuncioExternoDTO> anunciosDTO = AnuncioExternoDTO.converte(anuncios);
+        return anunciosDTO;
     }
 
     public AnuncioInternoDTO getAnuncioById(Long anuncioId) {
