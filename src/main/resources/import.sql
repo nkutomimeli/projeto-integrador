@@ -57,15 +57,23 @@ Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidad
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (7, 7, 350, 350, -5, '2022-11-17', '2022-01-25 22:15:00');
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (8, 8, 500, 500, 7, '2022-12-10', '2022-01-27 16:44:00');
 
---Inserção de comprador
-Insert into comprador (nome, username, senha) values ('Fernado ventura', 'fernado', '123456');
-Insert into comprador (nome, username, senha) values ('Marcos algusto', 'marcos', '123456');
-Insert into comprador (nome, username, senha) values ('Maria ferreira', 'maria', '123456');
-Insert into comprador (nome, username, senha) values ('Carlos henrique', 'carlos', '123456');
-Insert into comprador (nome, username, senha) values ('Constatino algunsto', 'constatino', '123456');
-Insert into comprador (nome, username, senha) values ('Camila pitanga', 'fernado', '123456');
-Insert into comprador (nome, username, senha) values ('Toni ferreira', 'toni', '123456');
-Insert into comprador (nome, username, senha) values ('Algunsto ventura', 'algusto', '123456');
-Insert into comprador (nome, username, senha) values ('ventura ferreira', 'ventura', '123456');
+--Inserção de perfil
+Insert into perfil (nome) VALUES ('Representante');
+Insert into perfil (nome) VALUES ('Comprador');
+Insert into perfil (nome) VALUES ('Vendedor');
 
+
+--Inserção de usuario
+Insert into usuario(username, enabled, password) values ('lucian', true, '12345' );
+Insert into usuario(username, enabled, password) values ('iohara', true, '12345' );
+Insert into usuario(username, enabled, password) values ('nathan', true, '12345' );
+Insert into usuario(username, enabled, password) values ('ismael', true, '12345' );
+Insert into usuario(username, enabled, password) values ('vanessa', true, '12345' );
+
+--Inserção de comprador
+Insert into comprador (usuario_username) values ('lucian');
+Insert into comprador (usuario_username) values ('iohara');
+Insert into comprador (usuario_username) values ('nathan');
+Insert into comprador (usuario_username) values ('ismael');
+Insert into comprador (usuario_username) values ('vanessa');
 
