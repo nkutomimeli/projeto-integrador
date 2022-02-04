@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+@Getter
 public class Representante {
 
     @Id
@@ -18,5 +19,6 @@ public class Representante {
 
     @ManyToOne
     @JoinColumn(name="armazem_id")
+    @JsonIgnoreProperties("representantes")
     private Armazem armazem;
 }

@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.AnuncioExternoDTO;
+import com.example.demo.dto.AnuncioInternoDTO;
 import com.example.demo.entity.Anuncio;
 import com.example.demo.entity.OrdemEntrada;
 import com.example.demo.enums.Tipos;
@@ -20,16 +22,28 @@ public class AnuncioController {
     private AnuncioService anuncioService;
 
     @GetMapping("")
-    public ResponseEntity<List<Anuncio>> listAnuncios() {
-        List<Anuncio> listaAnuncios = anuncioService.listAnunciosValidos();
+    public ResponseEntity<List<AnuncioExternoDTO>> listAnuncios() {
+        List<AnuncioExternoDTO> listaAnuncios = anuncioService.listAnunciosValidos();
         return ResponseEntity.status(HttpStatus.OK).body(listaAnuncios);
     }
 
-    @GetMapping("/list") // ?querytype=FRESCO
-    public ResponseEntity<List<Anuncio>> listAnunciosPorTipo(@RequestParam("querytype") Tipos categoria) {
-        System.out.println(categoria);
-        List<Anuncio> listaAnuncios = anuncioService.listAnunciosByCategory(categoria);
+    @GetMapping("/list") // ?categoria=FRESCO
+    public ResponseEntity<List<AnuncioExternoDTO>> listAnunciosPorTipo(@RequestParam("categoria") Tipos categoria) {
+        List<AnuncioExternoDTO> listaAnuncios = anuncioService.listAnunciosByCategory(categoria);
         return ResponseEntity.status(HttpStatus.OK).body(listaAnuncios);
+    }
+
+//    @GetMapping("/list") // ?anuncio_id=FRESCO
+    @GetMapping("/list/anuncio/{anuncio_id}") // /anuncio/1
+    public ResponseEntity<AnuncioInternoDTO> getAnuncioPorId(@PathVariable("anuncio_id") Long anuncioId) {
+        AnuncioInternoDTO anuncioInternoDTO = anuncioService.getAnuncioById(anuncioId);
+        return ResponseEntity.status(HttpStatus.OK).body(anuncioInternoDTO);
+    }
+
+    @GetMapping("/list/anuncio") // ?anuncio_id=1&orderBy=L
+    public ResponseEntity<AnuncioInternoDTO> getAnuncioPorIdOrdenados(@RequestParam("anuncioId") Long anuncioId, @RequestParam("orderBy") String orderBy ) {
+        AnuncioInternoDTO anuncioInternoDTO = anuncioService.getAnuncioByIdOrdered(anuncioId, orderBy);
+        return ResponseEntity.status(HttpStatus.OK).body(anuncioInternoDTO);
     }
 
 }
