@@ -77,3 +77,9 @@ Insert into comprador (usuario_username) values ('nathan');
 Insert into comprador (usuario_username) values ('ismael');
 Insert into comprador (usuario_username) values ('vanessa');
 
+--Inserção de perfil_usuario
+Insert into perfil_usuario (perfil_id, username) values (1, 'lucian');
+Insert into perfil_usuario (perfil_id, username) values (2, 'iohara');
+Insert into perfil_usuario (perfil_id, username) values (2, 'nathan');
+Insert into perfil_usuario (perfil_id, username) values (3, 'ismael');
+Insert into perfil_usuario (perfil_id, username) values (1, 'vanessa');

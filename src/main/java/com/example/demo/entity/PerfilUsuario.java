@@ -13,7 +13,7 @@ public class PerfilUsuario {
     private Long id;
 
     @ManyToOne()
-    @JoinColumn(name="usuario_id")
+    @JoinColumn(name="username")
     private Usuario usuario;
 
     @ManyToOne()
