@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -9,7 +10,8 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -22,10 +24,12 @@ public class OrdemEntrada {
 
     @ManyToOne
     @JoinColumn(name="setor_id")
+    @JsonIgnoreProperties("ordemEntradas")
     private Setor setor;
 
     @OneToMany(mappedBy="ordemEntrada")
     @ToString.Exclude
-    @JsonManagedReference
+//    @JsonManagedReference
+    @JsonIgnoreProperties({"ordemEntrada"})
     private Set<Estoque> estoques;
 }

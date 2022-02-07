@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,21 +11,21 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Setor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name="armazem_id") // insertable = false, updatable = false)
-    private Armazem armazem;
-
     private String nome; // CONGELADO, REFRIGERADO, FRESCO
     private Double volume;
 
+    @ManyToOne
+    @JoinColumn(name="armazem_id") // insertable = false, updatable = false)
+    @JsonIgnoreProperties("setors")
+    private Armazem armazem;
+
     @OneToMany(mappedBy="setor")
+    @JsonIgnoreProperties(value = {"setor", "anuncio"})
     private Set<OrdemEntrada> ordemEntradas;
 
 }

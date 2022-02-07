@@ -6,7 +6,7 @@ Insert into produto (nome, descricao) values ('Banana', 'Banana fresca');
 Insert into produto (nome, descricao) values ('Iogurte', 'Iogurte bebida láctea');
 Insert into produto (nome, descricao) values ('Manteiga', 'Manteiga de origem animal');
 Insert into produto (nome, descricao) values ('Sorvete', 'Sorvete napolitano');
-Insert into produto (nome, descricao) values ('Asas de Frango', 'Asas de frango j[a temperadas');
+Insert into produto (nome, descricao) values ('Asas de Frango', 'Asas de frango ja temperadas');
 
 -- Inserção de vendedores
 Insert into vendedor (nome) values ('Julio');
@@ -26,14 +26,19 @@ Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima,
 
 -- Inserção de armazem
 Insert into armazem (nome, CEP) values ('CD_Louveira', '00100-100');
+Insert into armazem (nome, CEP) values ('CD_Guarulhos', '07215-010');
 
 -- Inserção de representantes
 Insert into representante (armazem_id, nome) values (1, 'Ismael');
+Insert into representante (armazem_id, nome) values (2, 'Nathan');
 
 -- Inserção de setor
 Insert into setor (armazem_id, nome, volume) values (1, 'Fresco', 1000);
 Insert into setor (armazem_id, nome, volume) values (1, 'Refrigerado', 1000);
 Insert into setor (armazem_id, nome, volume) values (1, 'Congelado', 1000);
+Insert into setor (armazem_id, nome, volume) values (2, 'Fresco', 500);
+Insert into setor (armazem_id, nome, volume) values (2, 'Refrigerado', 500);
+Insert into setor (armazem_id, nome, volume) values (2, 'Congelado', 500);
 
 -- Inserção de ordem_entrada
 Insert into ordem_entrada (setor_id, data_criacao) values (1, '2022-01-27 11:00:00');
@@ -44,6 +49,9 @@ Insert into ordem_entrada (setor_id, data_criacao) values (2, '2022-01-30 10:00:
 Insert into ordem_entrada (setor_id, data_criacao) values (1, '2022-02-01 17:00:00');
 Insert into ordem_entrada (setor_id, data_criacao) values (3, '2022-02-02 16:00:00');
 Insert into ordem_entrada (setor_id, data_criacao) values (2, '2022-02-03 14:00:00');
+Insert into ordem_entrada (setor_id, data_criacao) values (4, '2022-02-01 17:00:00');
+Insert into ordem_entrada (setor_id, data_criacao) values (5, '2022-02-02 16:00:00');
+Insert into ordem_entrada (setor_id, data_criacao) values (6, '2022-02-03 14:00:00');
 
 -- Inserção de estoques
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (1, 1, 1000, 1000, 20, '2022-02-15', '2022-01-27 11:00:00');
@@ -57,10 +65,20 @@ Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidad
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (7, 7, 350, 350, -5, '2022-11-17', '2022-01-25 22:15:00');
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (8, 8, 500, 500, 7, '2022-12-10', '2022-01-27 16:44:00');
 
---Inserção de perfil
-Insert into perfil (nome) VALUES ('Representante');
-Insert into perfil (nome) VALUES ('Comprador');
-Insert into perfil (nome) VALUES ('Vendedor');
+Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (1, 9, 200, 200, 20, '2022-03-15', '2022-01-27 11:00:00');
+Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (5, 10, 500, 500, 3, '2022-02-21', '2022-01-20 07:34:00');
+Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (7, 11, 350, 350, -5, '2022-11-17', '2022-01-25 22:15:00');
+
+--Inserção de comprador
+-- Insert into comprador (nome) values ('Fernando Ventura');
+-- Insert into comprador (nome) values ('Marcos Augusto');
+-- Insert into comprador (nome) values ('Maria Ferreira');
+-- Insert into comprador (nome) values ('Carlos Henrique');
+-- Insert into comprador (nome) values ('Constatino Augusto');
+-- Insert into comprador (nome) values ('Camila Pitanga');
+-- Insert into comprador (nome) values ('Toni Ferreira');
+-- Insert into comprador (nome) values ('Augusto Ventura');
+-- Insert into comprador (nome) values ('Ventura Ferreira');
 
 
 --Inserção de usuario
@@ -77,9 +95,40 @@ Insert into comprador (usuario_username) values ('nathan');
 Insert into comprador (usuario_username) values ('ismael');
 Insert into comprador (usuario_username) values ('vanessa');
 
+--Inserção de perfil
+Insert into perfil (nome) VALUES ('Representante');
+Insert into perfil (nome) VALUES ('Comprador');
+Insert into perfil (nome) VALUES ('Vendedor');
+
 --Inserção de perfil_usuario
 Insert into perfil_usuario (perfil_id, username) values (1, 'lucian');
 Insert into perfil_usuario (perfil_id, username) values (2, 'iohara');
 Insert into perfil_usuario (perfil_id, username) values (2, 'nathan');
 Insert into perfil_usuario (perfil_id, username) values (3, 'ismael');
 Insert into perfil_usuario (perfil_id, username) values (1, 'vanessa');
+
+
+-- Inserção de Carrinho_comprador
+Insert into carrinho (comprador_id, data_criacao, status) values (1, '2021-01-27 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (1, '2021-01-25 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (1, '2021-01-17 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (2, '2020-01-27 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (2, '2022-01-17 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (3, '2020-01-17 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (3, '2022-01-17 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (4, '2021-01-17 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (5, '2022-01-27 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (5, '2020-01-27 11:00:00', 0);
+
+--Inserção de Item_carrinho
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (1, 1, 10, 5);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (1, 1, 12, 12);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (2, 1, 10, 12);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (2, 1, 4, 12);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (3, 1, 15, 7);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (3, 1, 10, 7);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (3, 1, 22, 7);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (3, 1, 11, 7);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 12, 23);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 12, 23);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 10, 23);
