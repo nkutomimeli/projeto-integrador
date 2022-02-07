@@ -29,13 +29,13 @@ public class Usuario implements UserDetails{
     @Column(name="enabled")
     private boolean ativo;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Perfil> perfis;
+    //@ManyToMany(fetch = FetchType.EAGER)
+    //private List<Perfil> perfis;
 
-    /*
-    @OneToMany(mappedBy = "usuario")
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario")
     private List<PerfilUsuario> perfisUsuarios;
-     */
+
 
     public String getUser() {
         return user;
@@ -53,8 +53,13 @@ public class Usuario implements UserDetails{
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        //this.perfisUsuarios.forEach(perfil-> authorities.add(new SimpleGrantedAuthority(perfil.getPerfil().getNome())));
-        this.perfis.forEach(perfil-> authorities.add(new SimpleGrantedAuthority(perfil.getNome())));
+        this.perfisUsuarios.forEach(perfil-> {
+            SimpleGrantedAuthority autority = new SimpleGrantedAuthority(perfil.getPerfil().getNome());
+            authorities.add(autority);
+            System.out.println("\n\n\n*******\nAUTORITY: " + autority);
+            System.out.println("\nPERFIL: " + perfil.getPerfil().getNome());
+        });
+        //this.perfis.forEach(perfil-> authorities.add(new SimpleGrantedAuthority(perfil.getNome())));
         return authorities;
     }
     @Override
