@@ -6,7 +6,7 @@ Insert into produto (nome, descricao) values ('Banana', 'Banana fresca');
 Insert into produto (nome, descricao) values ('Iogurte', 'Iogurte bebida láctea');
 Insert into produto (nome, descricao) values ('Manteiga', 'Manteiga de origem animal');
 Insert into produto (nome, descricao) values ('Sorvete', 'Sorvete napolitano');
-Insert into produto (nome, descricao) values ('Asas de Frango', 'Asas de frango j[a temperadas');
+Insert into produto (nome, descricao) values ('Asas de Frango', 'Asas de frango ja temperadas');
 
 -- Inserção de vendedores
 Insert into vendedor (nome) values ('Julio');
@@ -70,14 +70,39 @@ Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidad
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (7, 11, 350, 350, -5, '2022-11-17', '2022-01-25 22:15:00');
 
 --Inserção de comprador
-Insert into comprador (nome, username, senha) values ('Fernado ventura', 'fernado', '123456');
-Insert into comprador (nome, username, senha) values ('Marcos algusto', 'marcos', '123456');
-Insert into comprador (nome, username, senha) values ('Maria ferreira', 'maria', '123456');
-Insert into comprador (nome, username, senha) values ('Carlos henrique', 'carlos', '123456');
-Insert into comprador (nome, username, senha) values ('Constatino algunsto', 'constatino', '123456');
-Insert into comprador (nome, username, senha) values ('Camila pitanga', 'fernado', '123456');
-Insert into comprador (nome, username, senha) values ('Toni ferreira', 'toni', '123456');
-Insert into comprador (nome, username, senha) values ('Algunsto ventura', 'algusto', '123456');
-Insert into comprador (nome, username, senha) values ('ventura ferreira', 'ventura', '123456');
+Insert into comprador (nome, username, senha) values ('Fernando Ventura', 'fernando', '123456');
+Insert into comprador (nome, username, senha) values ('Marcos Augusto', 'marcos', '123456');
+Insert into comprador (nome, username, senha) values ('Maria Ferreira', 'maria', '123456');
+Insert into comprador (nome, username, senha) values ('Carlos Henrique', 'carlos', '123456');
+Insert into comprador (nome, username, senha) values ('Constatino Augusto', 'constatino', '123456');
+Insert into comprador (nome, username, senha) values ('Camila Pitanga', 'camila', '123456');
+Insert into comprador (nome, username, senha) values ('Toni Ferreira', 'toni, '123456');
+Insert into comprador (nome, username, senha) values ('Augusto Ventura', 'augusto', '123456');
+Insert into comprador (nome, username, senha) values ('Ventura Ferreira', 'ventura', '123456');
+
+-- Inserção de Carrinho_comprador
+Insert into carrinho (comprador_id, data_criacao, status) values (1, '2021-01-27 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (1, '2021-01-25 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (1, '2021-01-17 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (2, '2020-01-27 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (2, '2022-01-17 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (3, '2020-01-17 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (3, '2022-01-17 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (4, '2021-01-17 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (5, '2022-01-27 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (6, '2020-01-27 11:00:00', 0);
+
+--Inserção de Item_carrinho
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (1, 1, 10, 5);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (1, 1, 12, 12);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (2, 1, 10, 12);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (2, 1, 4, 12);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (3, 1, 15, 7);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (3, 1, 10, 7);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (3, 1, 22, 7);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (3, 1, 11, 7);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 12, 23);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 12, 23);
+Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 10, 23);
 
 
