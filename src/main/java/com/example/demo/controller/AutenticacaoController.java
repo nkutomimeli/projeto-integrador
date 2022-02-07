@@ -16,7 +16,7 @@ import com.example.demo.dto.TokenDTO;
 import com.example.demo.request.LoginRequest;
 
 @RestController
-@RequestMapping("/api/v1/fresh-products/auth")
+@RequestMapping("/api/v1/auth")
 public class AutenticacaoController {
 
     @Autowired
