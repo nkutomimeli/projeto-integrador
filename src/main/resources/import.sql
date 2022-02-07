@@ -26,14 +26,19 @@ Insert into anuncio (vendedor_id, produto_id, preco, volume, temperatura_maxima,
 
 -- Inserção de armazem
 Insert into armazem (nome, CEP) values ('CD_Louveira', '00100-100');
+Insert into armazem (nome, CEP) values ('CD_Guarulhos', '07215-010');
 
 -- Inserção de representantes
 Insert into representante (armazem_id, nome) values (1, 'Ismael');
+Insert into representante (armazem_id, nome) values (2, 'Nathan');
 
 -- Inserção de setor
 Insert into setor (armazem_id, nome, volume) values (1, 'Fresco', 1000);
 Insert into setor (armazem_id, nome, volume) values (1, 'Refrigerado', 1000);
 Insert into setor (armazem_id, nome, volume) values (1, 'Congelado', 1000);
+Insert into setor (armazem_id, nome, volume) values (2, 'Fresco', 500);
+Insert into setor (armazem_id, nome, volume) values (2, 'Refrigerado', 500);
+Insert into setor (armazem_id, nome, volume) values (2, 'Congelado', 500);
 
 -- Inserção de ordem_entrada
 Insert into ordem_entrada (setor_id, data_criacao) values (1, '2022-01-27 11:00:00');
@@ -44,6 +49,9 @@ Insert into ordem_entrada (setor_id, data_criacao) values (2, '2022-01-30 10:00:
 Insert into ordem_entrada (setor_id, data_criacao) values (1, '2022-02-01 17:00:00');
 Insert into ordem_entrada (setor_id, data_criacao) values (3, '2022-02-02 16:00:00');
 Insert into ordem_entrada (setor_id, data_criacao) values (2, '2022-02-03 14:00:00');
+Insert into ordem_entrada (setor_id, data_criacao) values (4, '2022-02-01 17:00:00');
+Insert into ordem_entrada (setor_id, data_criacao) values (5, '2022-02-02 16:00:00');
+Insert into ordem_entrada (setor_id, data_criacao) values (6, '2022-02-03 14:00:00');
 
 -- Inserção de estoques
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (1, 1, 1000, 1000, 20, '2022-02-15', '2022-01-27 11:00:00');
@@ -56,6 +64,10 @@ Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidad
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (6, 6, 3000, 3000, 17, '2022-02-23', '2022-01-28 14:14:00');
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (7, 7, 350, 350, -5, '2022-11-17', '2022-01-25 22:15:00');
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (8, 8, 500, 500, 7, '2022-12-10', '2022-01-27 16:44:00');
+
+Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (1, 9, 200, 200, 20, '2022-03-15', '2022-01-27 11:00:00');
+Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (5, 10, 500, 500, 3, '2022-02-21', '2022-01-20 07:34:00');
+Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (7, 11, 350, 350, -5, '2022-11-17', '2022-01-25 22:15:00');
 
 --Inserção de comprador
 Insert into comprador (nome, username, senha) values ('Fernado ventura', 'fernado', '123456');

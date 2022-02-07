@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.ProdutoVazioException;
 import exception.BusinessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -64,6 +65,17 @@ public class ControllerAdvice {
      */
     @ExceptionHandler(AnunciosVaziosException.class)
     protected ResponseEntity<Object> handleAnunciosVaziosException(AnunciosVaziosException ex, WebRequest request) {
+        return ResponseEntity.notFound().build();
+    }
+
+    /**
+     * O handler usado para tratar a listagem de armazem de produto vazio.
+     * @param ex (ProdutoVazioException)
+     * @param request (WebRequest)
+     * @return HTTPResponse 404 com a mensagem de erro (String)
+     */
+    @ExceptionHandler(ProdutoVazioException.class)
+    protected ResponseEntity<Object> handleProdutoVazioException(ProdutoVazioException ex, WebRequest request) {
         return ResponseEntity.notFound().build();
     }
 
