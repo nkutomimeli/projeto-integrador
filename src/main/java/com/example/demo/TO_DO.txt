@@ -1,25 +1,23 @@
-VALIDAÇÕES
+1 - VALIDAR ARMAZEM *
+2 - VALIDAR SE ARMAZEM PERTENCE AO REPRESENTANTE -> AUTHENTICATION
 
-1 - VALIDAR SETOR --> OK!
-2 - VALIDAR SETOR CORRESPONDENTE AO TIPO PRODUTO --> OK!
-3 - VALIDAR ESPACO DO SETOR --> FALTANDO
+3 - VALIDAR N DE LOTE DO PRODUTO *
+4 - FILTRAR PRODUTO P/ N DE LOTE
+5 - FILTRAR PRODUTO P/ DATA VALIDADE
+6 - FILTRAR PRODUTO P/ CATEGORIA
 
-TODO:
-1 - VALIDAR ARMAZÉM -> Existe ? JWT ?
-2 - VALIDAR REPRESENTANTE PERTENCE AO ARMAZEM ? JWT ?
-
-
+OBS: Data de validade não é obrigatório!
 
 
-
-CENÁRIO 1: O produto de um vendedor é registrado.
-
+CENÁRIO 1: um produto do vendedor é registrado
+DESDE o produto de um Vendedor é registrado
 E que o armazém é válido
 E que o representante pertence ao armazém
-E que o setor é válido
-E que o setor corresponde ao tipo de produto
-E que o setor tenha espaço disponível
-QUANDO o representante entra no lote
-ENTÃO o registro de compra é criado
-E o lote é atribuído a um setor
-E o representante é associado ao registro de estoque
+QUANDO o representante insere o número de dias
+ENTÃO, uma lista de produtos é exibida com uma data de validade entre a data atual e a data futura
+(data atual + dias inseridos)
+E que o produto tem um número de lote
+E que o produto é filtrado por número de lote
+E que o produto é filtrado por data de validade
+E que o produto seja filtrado de acordo com a categoria dos produtos (frescos, congelados,
+refrigerados)
