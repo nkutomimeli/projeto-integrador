@@ -1,10 +1,6 @@
 package com.example.demo.dto;
 
-import com.example.demo.entity.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.validation.annotation.Validated;
 
 @Getter
@@ -18,12 +14,18 @@ public class ListaArmazemDTO {
 
     private Integer totalQuantidade;
 
-    /*
-    public static ListaArmazemDTO converte(Armazem armazem, Estoque estoque) {
-        return ListaArmazemDTO.builder()
-                .armazem_id(armazem.getId())
-                .totalQuantidade(estoque.getQuantidadeAtual())
-                .build();
+    public ListaArmazemDTO armazem_id(Long armazem_id) {
+        this.armazem_id = armazem_id;
+        return this;
     }
-     */
+
+    public ListaArmazemDTO totalQuantidade(Integer totalQuantidade) {
+        this.totalQuantidade = totalQuantidade;
+        return this;
+    }
+
+    public ListaArmazemDTO build() {
+        return this;
+    }
+
 }

@@ -1,10 +1,7 @@
 package com.example.demo.dto;
 
-import com.example.demo.entity.Armazem;
-import com.example.demo.entity.Estoque;
 import lombok.*;
 import org.springframework.validation.annotation.Validated;
-
 import java.util.List;
 
 @Getter
@@ -14,16 +11,22 @@ import java.util.List;
 @Validated
 public class ArmazemDTO {
 
-    private Long estoque_id;
+    private Long produto_id;
 
-    private List<ListaArmazemDTO> listArmazem;
+    private List<ListaArmazemDTO> listaArmazem;
 
-    /*
-    public static ArmazemDTO converte(ListaArmazemDTO listaArmazemDTO, Estoque estoque) {
-        return ArmazemDTO.builder()
-                .estoque_id(estoque.getId())
-                .listArmazem(listaArmazemDTO.getArmazem_id())
-                .build();
+    public ArmazemDTO produto_id(Long produto_id) {
+        this.produto_id = produto_id;
+        return this;
     }
-     */
+
+    public ArmazemDTO listaArmazem(List<ListaArmazemDTO> listaArmazem) {
+        this.listaArmazem = listaArmazem;
+        return this;
+    }
+
+    public ArmazemDTO build() {
+        return this;
+    }
+
 }
