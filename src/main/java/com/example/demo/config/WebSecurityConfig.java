@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         http.authorizeRequests()
                 .antMatchers("/anuncios").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/fresh-products/auth").permitAll()
-                .antMatchers(HttpMethod.GET, "/vendas").hasAnyAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET, "/api/v1/fresh-products/capacidadeSetor/2").hasAnyAuthority("1")
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

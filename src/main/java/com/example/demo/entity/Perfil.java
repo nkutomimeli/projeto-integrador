@@ -20,8 +20,10 @@ public class Perfil implements GrantedAuthority{
     private Long id;
     private String nome;
 
+    /*
     @OneToMany(mappedBy = "perfil")
     private List<PerfilUsuario> perfisUsuarios;
+    */
 
     @Override
     public String getAuthority() {

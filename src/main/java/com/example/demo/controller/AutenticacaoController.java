@@ -27,6 +27,7 @@ public class AutenticacaoController {
     @PostMapping
     public ResponseEntity<TokenDTO> realizaAutenticacao(@RequestBody LoginRequest loginRequest) {
         UsernamePasswordAuthenticationToken dadosLogin = loginRequest.converter();
+
         Authentication authentication = manager.authenticate(dadosLogin);
         //
         String token = tokenService.geraToken(authentication);

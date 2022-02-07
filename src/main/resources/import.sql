@@ -64,11 +64,11 @@ Insert into perfil (nome) VALUES ('Vendedor');
 
 
 --Inserção de usuario
-Insert into usuario(username, enabled, password) values ('lucian', true, '12345' );
-Insert into usuario(username, enabled, password) values ('iohara', true, '12345' );
-Insert into usuario(username, enabled, password) values ('nathan', true, '12345' );
-Insert into usuario(username, enabled, password) values ('ismael', true, '12345' );
-Insert into usuario(username, enabled, password) values ('vanessa', true, '12345' );
+Insert into usuario(username, enabled, password) values ('lucian', true, '$2a$10$tzz.cCKJZz9nFCu.KT8Dcumnj9CR58Owwx/.VPhMqrQ4rt.EJRQhG' );
+Insert into usuario(username, enabled, password) values ('iohara', true, '$2a$10$tzz.cCKJZz9nFCu.KT8Dcumnj9CR58Owwx/.VPhMqrQ4rt.EJRQhG' );
+Insert into usuario(username, enabled, password) values ('nathan', true, '$2a$10$tzz.cCKJZz9nFCu.KT8Dcumnj9CR58Owwx/.VPhMqrQ4rt.EJRQhG' );
+Insert into usuario(username, enabled, password) values ('ismael', true, '$2a$10$tzz.cCKJZz9nFCu.KT8Dcumnj9CR58Owwx/.VPhMqrQ4rt.EJRQhG' );
+Insert into usuario(username, enabled, password) values ('vanessa', true, '$2a$10$tzz.cCKJZz9nFCu.KT8Dcumnj9CR58Owwx/.VPhMqrQ4rt.EJRQhG' );
 
 --Inserção de comprador
 Insert into comprador (usuario_username) values ('lucian');
