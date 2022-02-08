@@ -21,6 +21,4 @@ public class VendedorService {
         this.vendedorRepository.save(vendedor);
     }
 
-    public Vendedor findById(Long id) { return this.vendedorRepository.findById(id).orElse(new Vendedor()); }
-
 }

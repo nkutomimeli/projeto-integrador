@@ -19,6 +19,7 @@ import java.util.Set;
 public class MockCarrinho {
 
     private Set<ItemCarrinhoDTO> listaAnuncio = new HashSet<>();
+
     private Set<ItemCarrinhoDTO> listaAnuncioUpdate = new HashSet<>();
     private ItemCarrinhoDTO item;
     private ItemCarrinhoDTO itemUpdate;
@@ -39,6 +40,7 @@ public class MockCarrinho {
     private List<ItemCarrinho> itensCarrinhos = new ArrayList<>();
     private List<ItemCarrinho> itensCarrinhosSalvo = new ArrayList<>();
 
+
     public MockCarrinho() {
 
         item = ItemCarrinhoDTO.builder()
@@ -48,6 +50,7 @@ public class MockCarrinho {
                 .build();
 
         listaAnuncio.add(item);
+
 
         itemUpdate = ItemCarrinhoDTO.builder()
                 .id(1L)
@@ -109,6 +112,7 @@ public class MockCarrinho {
 
 
 
+
         itemCarrinho = ItemCarrinhoDTO.converte(item, anuncio, carrinho);
         itemCarrinhoUpdate = ItemCarrinhoDTO.converte(itemUpdate, anuncio, carrinho);
 
@@ -141,6 +145,7 @@ public class MockCarrinho {
                 .listaAnuncio(listaAnuncio)
                 .build();
 
+
         dtoUpdate = CarrinhoDTO.builder()
                 .dataCriacao(LocalDateTime.of(2022,1,1,2,2,2))
                 .comprador_id(1L)
@@ -151,3 +156,4 @@ public class MockCarrinho {
 
     }
 }
+
