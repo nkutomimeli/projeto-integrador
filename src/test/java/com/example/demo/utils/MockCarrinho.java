@@ -16,25 +16,26 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-public class mockCarrinho {
+public class MockCarrinho {
 
     private Set<ItemCarrinhoDTO> listaAnuncio = new HashSet<>();
+    private ItemCarrinhoDTO item;
     private List<Estoque> listaEstoque = new ArrayList<>();
-    private OrdemEntrada ordemEntrada = new OrdemEntrada();
-    private Produto produto = new Produto();
-    private Vendedor vendedor = new Vendedor();
-    private Anuncio anuncio = new Anuncio();
-    private Estoque estoque = new Estoque();
-    private Usuario usuario = new Usuario();
-    private Comprador comprador = new Comprador();
-    private Carrinho carrinho = new Carrinho();
-    private CarrinhoDTO dto = new CarrinhoDTO();
-    private ItemCarrinho itemCarrinho = new ItemCarrinho();
+    private OrdemEntrada ordemEntrada;
+    private Produto produto;
+    private Vendedor vendedor;
+    private Anuncio anuncio;
+    private Estoque estoque;
+    private Usuario usuario;
+    private Comprador comprador;
+    private Carrinho carrinho;
+    private CarrinhoDTO dto;
+    private ItemCarrinho itemCarrinho;
     private List<ItemCarrinho> itensCarrinhos = new ArrayList<>();
 
-    public MockCarrinhoObjeto() {
+    public MockCarrinho() {
 
-        ItemCarrinhoDTO item = ItemCarrinhoDTO.builder()
+        item = ItemCarrinhoDTO.builder()
                 .anuncio_id(1L)
                 .quantidade(1)
                 .build();
@@ -108,7 +109,5 @@ public class mockCarrinho {
         itemCarrinho = ItemCarrinhoDTO.converte(item, anuncio, carrinho);
 
         itensCarrinhos.add(itemCarrinho);
-
-
     }
 }
