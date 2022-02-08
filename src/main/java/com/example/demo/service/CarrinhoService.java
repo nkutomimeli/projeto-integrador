@@ -29,6 +29,15 @@ public class CarrinhoService {
     @Autowired
     EstoqueRepository estoqueRepository;
 
+    public CarrinhoService(CarrinhoRepository mockCarrinho, AnuncioRepository mockAnuncio, CompradorRepository mockComprador,
+                           EstoqueRepository mockEstoque, ItemCarrinhoRepository mockItemCarrinho) {
+        this.carrinhoRepository = mockCarrinho;
+        this.anuncioRepository = mockAnuncio;
+        this.compradorRepository = mockComprador;
+        this.estoqueRepository = mockEstoque;
+        this.itemCarrinhoRepository = mockItemCarrinho;
+    }
+
     public PrecoTotalDTO save(CarrinhoDTO carrinhoDTO) {
         // Faz validação da quantidade de estoque e data de validade
         if(!checkStockAndExpirationDate(carrinhoDTO)) {
@@ -70,7 +79,7 @@ public class CarrinhoService {
 
         // Atualiza o Carrinho no banco de dados
         Carrinho carrinho = this.carrinhoRepository.findById(id).orElse(new Carrinho());
-        Carrinho carrinhoSalvo = this.carrinhoRepository.save(carrinho);
+        Carrinho carrinhoSalvo = this.carrinhoRepository.saveAndFlush(carrinho);
 
         // Atualiza o ItemCarrinho no banco de dados
         Set<ItemCarrinhoDTO> listaItemCarrinho = carrinhoDTO.getListaAnuncio();
@@ -80,7 +89,7 @@ public class CarrinhoService {
             itemCarrinho.setCarrinho(carrinhoSalvo);
             itemCarrinho.setAnuncio(anuncio);
             decreaseStock(item.getAnuncio_id(), item.getQuantidade());
-            this.itemCarrinhoRepository.save(ItemCarrinhoDTO.converte(item, anuncio, carrinhoSalvo));
+            this.itemCarrinhoRepository.saveAndFlush(ItemCarrinhoDTO.converte(item, anuncio, carrinhoSalvo));
         }));
         return CarrinhoDTO.converte(carrinhoSalvo);
     }
