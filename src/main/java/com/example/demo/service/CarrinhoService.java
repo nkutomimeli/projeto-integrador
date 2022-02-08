@@ -29,6 +29,15 @@ public class CarrinhoService {
     @Autowired
     EstoqueRepository estoqueRepository;
 
+    public CarrinhoService(CarrinhoRepository mockCarrinho, AnuncioRepository mockAnuncio, CompradorRepository mockComprador,
+                           EstoqueRepository mockEstoque, ItemCarrinhoRepository mockItemCarrinho) {
+        this.carrinhoRepository = mockCarrinho;
+        this.anuncioRepository = mockAnuncio;
+        this.compradorRepository = mockComprador;
+        this.estoqueRepository = mockEstoque;
+        this.itemCarrinhoRepository = mockItemCarrinho;
+    }
+
     public PrecoTotalDTO save(CarrinhoDTO carrinhoDTO) {
         // Faz validação da quantidade de estoque e data de validade
         if(!checkStockAndExpirationDate(carrinhoDTO)) {
