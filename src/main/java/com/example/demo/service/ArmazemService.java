@@ -5,7 +5,6 @@ import com.example.demo.dto.ListaArmazemDTO;
 import com.example.demo.exception.ProdutoVazioException;
 import com.example.demo.interfaces.ListaArmazemInterface;
 import com.example.demo.repository.EstoqueRepository;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +12,15 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Service
 public class ArmazemService {
 
     @Autowired
     private EstoqueRepository estoqueRepository;
 
+    public ArmazemService (EstoqueRepository estoqueRepository) {
+        this.estoqueRepository = estoqueRepository;
+    }
 
     public ArmazemDTO getEstoqueByArmazem(Long produto_id) {
         ArmazemDTO armazemDTO = new ArmazemDTO();
