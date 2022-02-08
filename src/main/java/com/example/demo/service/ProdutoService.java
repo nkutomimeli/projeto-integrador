@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Service
 public class ProdutoService {
@@ -17,8 +15,8 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public void save(Produto produto){
-        this.produtoRepository.save(produto);
+    public Produto save(Produto produto){
+        return this.produtoRepository.save(produto);
     }
 
 }
