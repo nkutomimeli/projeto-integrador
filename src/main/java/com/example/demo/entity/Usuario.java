@@ -14,12 +14,15 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class Usuario implements UserDetails{
 
     private static final long serialVersionUID = 1L;
+
+
 
     public boolean isAtivo() {
         return ativo;

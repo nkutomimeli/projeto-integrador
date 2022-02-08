@@ -19,7 +19,10 @@ import java.util.Set;
 public class MockCarrinho {
 
     private Set<ItemCarrinhoDTO> listaAnuncio = new HashSet<>();
+
+    private Set<ItemCarrinhoDTO> listaAnuncioUpdate = new HashSet<>();
     private ItemCarrinhoDTO item;
+    private ItemCarrinhoDTO itemUpdate;
     private List<Estoque> listaEstoque = new ArrayList<>();
     private OrdemEntrada ordemEntrada;
     private Produto produto;
@@ -29,18 +32,33 @@ public class MockCarrinho {
     private Usuario usuario;
     private Comprador comprador;
     private Carrinho carrinho;
+    private Carrinho carrinhoSalvo;
     private CarrinhoDTO dto;
+    private CarrinhoDTO dtoUpdate;
     private ItemCarrinho itemCarrinho;
+    private ItemCarrinho itemCarrinhoUpdate;
     private List<ItemCarrinho> itensCarrinhos = new ArrayList<>();
+    private List<ItemCarrinho> itensCarrinhosSalvo = new ArrayList<>();
+
 
     public MockCarrinho() {
 
         item = ItemCarrinhoDTO.builder()
+                .id(1L)
                 .anuncio_id(1L)
                 .quantidade(1)
                 .build();
 
         listaAnuncio.add(item);
+
+
+        itemUpdate = ItemCarrinhoDTO.builder()
+                .id(1L)
+                .anuncio_id(1L)
+                .quantidade(2)
+                .build();
+
+        listaAnuncioUpdate.add(itemUpdate);
 
         ordemEntrada = OrdemEntrada.builder()
                 .id(1L)
@@ -92,11 +110,32 @@ public class MockCarrinho {
                 .usuario(usuario)
                 .build();
 
+
+
+
+        itemCarrinho = ItemCarrinhoDTO.converte(item, anuncio, carrinho);
+        itemCarrinhoUpdate = ItemCarrinhoDTO.converte(itemUpdate, anuncio, carrinho);
+
+        itensCarrinhos.add(itemCarrinho);
+        itensCarrinhosSalvo.add(itemCarrinhoUpdate);
+
+        Set<ItemCarrinho> listaAnuncioSet = new HashSet<>(itensCarrinhos);
+        Set<ItemCarrinho> listaAnuncioSetSalvo = new HashSet<>(itensCarrinhosSalvo);
+
         carrinho = Carrinho.builder()
                 .id(1L)
                 .dataCriacao(LocalDateTime.of(2022,1,1,2,2,2))
                 .status(0)
                 .comprador(comprador)
+                .itensCarrinho(listaAnuncioSet)
+                .build();
+
+        carrinhoSalvo = Carrinho.builder()
+                .id(1L)
+                .dataCriacao(LocalDateTime.of(2022,1,1,2,2,2))
+                .status(0)
+                .comprador(comprador)
+                .itensCarrinho(listaAnuncioSetSalvo)
                 .build();
 
         dto = CarrinhoDTO.builder()
@@ -106,8 +145,15 @@ public class MockCarrinho {
                 .listaAnuncio(listaAnuncio)
                 .build();
 
-        itemCarrinho = ItemCarrinhoDTO.converte(item, anuncio, carrinho);
 
-        itensCarrinhos.add(itemCarrinho);
+        dtoUpdate = CarrinhoDTO.builder()
+                .dataCriacao(LocalDateTime.of(2022,1,1,2,2,2))
+                .comprador_id(1L)
+                .status(Status.ABERTO)
+                .listaAnuncio(listaAnuncioUpdate)
+                .build();
+
+
     }
 }
+

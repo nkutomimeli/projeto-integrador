@@ -21,6 +21,4 @@ public class ProdutoService {
         this.produtoRepository.save(produto);
     }
 
-    public Produto findById(Long id) { return this.produtoRepository.findById(id).orElse(new Produto()); }
-
 }
