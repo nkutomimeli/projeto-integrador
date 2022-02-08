@@ -79,7 +79,7 @@ public class CarrinhoService {
 
         // Atualiza o Carrinho no banco de dados
         Carrinho carrinho = this.carrinhoRepository.findById(id).orElse(new Carrinho());
-        Carrinho carrinhoSalvo = this.carrinhoRepository.save(carrinho);
+        Carrinho carrinhoSalvo = this.carrinhoRepository.saveAndFlush(carrinho);
 
         // Atualiza o ItemCarrinho no banco de dados
         Set<ItemCarrinhoDTO> listaItemCarrinho = carrinhoDTO.getListaAnuncio();
@@ -89,7 +89,7 @@ public class CarrinhoService {
             itemCarrinho.setCarrinho(carrinhoSalvo);
             itemCarrinho.setAnuncio(anuncio);
             decreaseStock(item.getAnuncio_id(), item.getQuantidade());
-            this.itemCarrinhoRepository.save(ItemCarrinhoDTO.converte(item, anuncio, carrinhoSalvo));
+            this.itemCarrinhoRepository.saveAndFlush(ItemCarrinhoDTO.converte(item, anuncio, carrinhoSalvo));
         }));
         return CarrinhoDTO.converte(carrinhoSalvo);
     }
