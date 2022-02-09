@@ -5,13 +5,14 @@ import com.example.demo.dto.ListaArmazemDTO;
 import com.example.demo.exception.ProdutoVazioException;
 import com.example.demo.interfaces.ListaArmazemInterface;
 import com.example.demo.repository.EstoqueRepository;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe que contem a logica de negocio da entidade Armazem
+ */
 @Service
 public class ArmazemService {
 
@@ -22,6 +23,11 @@ public class ArmazemService {
         this.estoqueRepository = estoqueRepository;
     }
 
+    /**
+     * Método para retornar um produto com uma lista de armazem e seus respectivos estoques
+     * @param (Long) produto_id
+     * @return (ArmazemDTO) um produto com uma lista de armazem e estoques
+     */
     public ArmazemDTO getEstoqueByArmazem(Long produto_id) {
         ArmazemDTO armazemDTO = new ArmazemDTO();
         armazemDTO.produto_id(produto_id);

@@ -8,19 +8,13 @@ import com.example.demo.entity.Estoque;
 import com.example.demo.enums.Tipos;
 import com.example.demo.exception.AnunciosVaziosException;
 import com.example.demo.repository.AnuncioRepository;
-import com.example.demo.repository.EstoqueRepository;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.apache.tomcat.jni.Local;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Collectors;
 
+/**
+ * Classe que contem a lógica de negócio da classe Anuncio
+ */
 @Service
 public class AnuncioService {
 
@@ -30,11 +24,11 @@ public class AnuncioService {
         this.anuncioRepository = anuncioRepository;
     }
 
-    //    private EstoqueRepository estoqueRepository;
-
+    /** Método para retornar uma lista de anúncios validos
+     * com quantidade atual maior do que zero e validade de pelos menos 3 semanas
+     * @return (List<AnuncioExternoDTO>) lista de anunciosDTO personalizado com as saídas definidas para o comprador
+     */
     public List<AnuncioExternoDTO> listAnunciosValidos() {
-        // Listar todos os anúncios válidos com quantidade atual maior
-        // que zero e validade de pelo menos 3 semanas
 
         LocalDate dataValidadeMais3Semanas = LocalDate.now().plusWeeks(3);
         List<Anuncio> anuncios = this.anuncioRepository.findAllAnunciosWithStockAndDueDateValid(dataValidadeMais3Semanas);
@@ -43,10 +37,14 @@ public class AnuncioService {
         return anunciosDTO;
     }
 
+    /**
+     * Métodos para listar todos os anúncios válidos com quantidade atual maior que zero
+     * e validade de pelos menos 3 semanas, por categoria
+     * @param (Tipos) categoria (FRESCO, REFRIGERADO ou CONGELADO)
+     * @return (List<AnuncioExternoDTO>) lista de anunciosDTO personalizado com as saídas definidas para o comprador
+     */
     public List<AnuncioExternoDTO> listAnunciosByCategory(Tipos categoria) {
-        // Listar todos os anúncios válidos com quantidade atual maior
-        // que zero e validade de pelo menos 3 semanas, por categoria
-        // FRESCO, REFRIGERADO ou CONGELADO
+
         LocalDate dataValidadeMais3Semanas = LocalDate.now().plusWeeks(3);
         List<Anuncio> anuncios = this.anuncioRepository.findAllAnunciosByCategoryWithStockAndDueDateValid(dataValidadeMais3Semanas, categoria);
         if (anuncios.isEmpty()) throw new AnunciosVaziosException("Nenhum anúncio encontrado.");
@@ -54,8 +52,12 @@ public class AnuncioService {
         return anunciosDTO;
     }
 
+    /**
+     * Método para listar um anúncio pelo ID
+     * @param (Long) anuncioId
+     * @return (anuncioInternoDTO) anúncio personalizado com as saídas definidas para o vendedor
+     */
     public AnuncioInternoDTO getAnuncioById(Long anuncioId) {
-        // Pega o Anúncio pelo seu ID
 
         Optional<Anuncio> anuncioOptional = this.anuncioRepository.findById(anuncioId);
         if (anuncioOptional.isEmpty()) throw new AnunciosVaziosException("Nenhum anúncio encontrado.");
@@ -64,8 +66,13 @@ public class AnuncioService {
         return anuncioInternoDTO;
     }
 
+    /**
+     * Método para listar um anúncio pelo ID, ordenando pelos estoques
+     * @param (Long) anuncioId
+     * @param (String) orderBy
+     * @return (anuncioInternoDTO) anúncio personalizado com as saídas definidas para o vendedor
+     */
     public AnuncioInternoDTO getAnuncioByIdOrdered(Long anuncioId, String orderBy) {
-        // Pega o Anúncio pelo seu ID, ordenando pelos estoques
 
         Optional<Anuncio> anuncioOptional = this.anuncioRepository.findById(anuncioId);
         if (anuncioOptional.isEmpty()) throw new AnunciosVaziosException("Nenhum anúncio encontrado.");
@@ -85,6 +92,12 @@ public class AnuncioService {
         return anuncioInternoDTO;
     }
 
+    /**
+     * Método que ordena os estoques, utilizado no método getAnuncioByIdOrdered
+     * @param (Set<Estoque>) estoques
+     * @param (String) orderBy
+     * @return (List<Estoque>) estoqueList, uma lista de estoque
+     */
     private List<Estoque> getEstoquesOrdenados(Set<Estoque> estoques, String orderBy) {
         List<Estoque> estoqueList = new ArrayList<Estoque>(estoques);
         switch (orderBy) {

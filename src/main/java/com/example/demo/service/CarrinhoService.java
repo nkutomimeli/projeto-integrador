@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Classe que contém a lógica de negócio da classe Carrinho
+ */
 @Service
 public class CarrinhoService {
 
@@ -38,6 +41,11 @@ public class CarrinhoService {
         this.itemCarrinhoRepository = mockItemCarrinho;
     }
 
+    /**
+     * Método para salvar um carrinho e exibir o preço total do carrinho
+     * @param (CarrinhoDTO) carrinhoDTO
+     * @return (PrecoTotalDTO) com o valor total do carrinho
+     */
     public PrecoTotalDTO save(CarrinhoDTO carrinhoDTO) {
         // Faz validação da quantidade de estoque e data de validade
         if(!checkStockAndExpirationDate(carrinhoDTO)) {
@@ -65,12 +73,23 @@ public class CarrinhoService {
                 .build();
     }
 
+    /**
+     * Método para buscar um carrinho pelo ID
+     * @param (Long) id
+     * @return (CarrinhoDTO) carrinho
+     */
     public CarrinhoDTO getCarrinhoById(Long id) {
         // Retorna Carrinho pelo id
         Carrinho carrinho = this.carrinhoRepository.findById(id).orElse(new Carrinho());
         return CarrinhoDTO.converte(carrinho);
     }
 
+    /**
+     * Método para atualizar um carrinho de compra
+     * @param (CarrinhoDTO) carrinhoDTO
+     * @param (Long) id
+     * @return (CarrinhoDTO) carrinhoSalvo
+     */
     public CarrinhoDTO update(CarrinhoDTO carrinhoDTO, Long id) {
         // Faz validação da quantidade de estoque e data de validade
         if(!checkStockAndExpirationDate(carrinhoDTO)) {
@@ -94,6 +113,12 @@ public class CarrinhoService {
         return CarrinhoDTO.converte(carrinhoSalvo);
     }
 
+    /**
+     * Método para validar se existe anúncio que atendem aos requisitos: quantidade maior que zero
+     * e validade igual ou maior do que 21 dias
+     * @param (CarrinhoDTO) dto
+     * @return (Boolean) true
+     */
     private Boolean checkStockAndExpirationDate(CarrinhoDTO dto) {
         // Flag para verificar se existe anúncio que atenda a esses requisitos
         for (ItemCarrinhoDTO item : dto.getListaAnuncio()) {
@@ -105,6 +130,11 @@ public class CarrinhoService {
         return true;
     }
 
+    /**
+     * Método privado para decrementar o estoque
+     * @param (Long) anuncio_id
+     * @param (Integer) quantidade
+     */
     private void decreaseStock(Long anuncio_id, Integer quantidade) {
         // Decrementar estoque
         LocalDate dataValidade = LocalDate.now().plusDays(21);
