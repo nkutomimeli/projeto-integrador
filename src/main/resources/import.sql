@@ -132,3 +132,8 @@ Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (3
 Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 12, 23);
 Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 12, 23);
 Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 10, 23);
+
+--Inserção de Veículo
+Insert into veiculo (nome, categoria, volume, frete_por_litro) values ('Fiorino', 0, 3345, 1.30);
+Insert into veiculo (nome, categoria, volume, frete_por_litro) values ('Mercedes-Benz Sprinter', 1, 10000, 1.65);
+Insert into veiculo (nome, categoria, volume, frete_por_litro) values ('Hyunday HR', 2, 10000, 2.00);

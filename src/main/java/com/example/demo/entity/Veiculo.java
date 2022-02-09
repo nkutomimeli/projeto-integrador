@@ -22,7 +22,7 @@ public class Veiculo {
     private Long id;
     private String nome;
     private Tipos categoria;
-    private Double volume; // em m3
+    private Double volume; // em Litros
     private BigDecimal fretePorLitro;
 
 }
