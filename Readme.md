@@ -1,6 +1,6 @@
-#BOOTCAMP IT 13/12
+# BOOTCAMP IT 13/12
 
-###Participantes do Grupo 10:
+### Participantes do Grupo 10:
 
 | Lucian | Iohara | Ismael | Nathan |Vanessa|
 | :---: | :---: | :---: | :---: |:---: |
@@ -44,7 +44,7 @@ possam montar o (s) pedido (s) para despachá-los.
 
 ## 🔗 Links Úteis [🔝](#welcome-badges-4-readmemd-profile)
 
-####* Para baixar as Coleções do Postaman:
+#### * Para baixar as Coleções do Postaman:
 
 [![PostMan](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white)](https://app.getpostman.com/run-collection/6803f5c6bc63844d9118?action=collection%2Fimport)
 
