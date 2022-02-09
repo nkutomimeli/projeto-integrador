@@ -21,16 +21,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Service
 public class AnuncioService {
 
-    @Autowired
     private AnuncioRepository anuncioRepository;
 
-    private EstoqueRepository estoqueRepository;
+    public AnuncioService(AnuncioRepository anuncioRepository) {
+        this.anuncioRepository = anuncioRepository;
+    }
+
+    //    private EstoqueRepository estoqueRepository;
 
     public List<AnuncioExternoDTO> listAnunciosValidos() {
         // Listar todos os anúncios válidos com quantidade atual maior
