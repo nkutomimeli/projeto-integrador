@@ -6,17 +6,11 @@ import com.example.demo.entity.*;
 import com.example.demo.interfaces.CapacidadeSetor;
 import com.example.demo.repository.*;
 import exception.BusinessException;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.*;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Service
 public class OrdemEntradaService {
 
@@ -31,6 +25,14 @@ public class OrdemEntradaService {
 
     @Autowired
     AnuncioRepository anuncioRepository;
+
+    public OrdemEntradaService(OrdemEntradaRepository ordemEntradaRepository, EstoqueRepository estoqueRepository,
+                               SetorRepository setorRepository, AnuncioRepository anuncioRepository) {
+        this.ordemEntradaRepository = ordemEntradaRepository;
+        this.estoqueRepository = estoqueRepository;
+        this.setorRepository = setorRepository;
+        this.anuncioRepository = anuncioRepository;
+    }
 
     // ------------------ //
     // MÉTODOS PRINCIPAIS //
@@ -118,7 +120,7 @@ public class OrdemEntradaService {
         Anuncio anuncio = this.anuncioRepository.findById(estoque.getAnuncio_id()).orElse(new Anuncio());
 
         //VALIDAR O TIPO DO PRODUTO == TIPO DO SETOR
-        if (anuncio.getTipo().getDescricao().equals(setor.getNome())) {
+        if (anuncio.getTipo().getDescricao().equalsIgnoreCase(setor.getNome())) {
             Estoque estoqueConvertido = EstoqueDTO.converte(estoque, anuncio, ordemEntrada);
             this.estoqueRepository.save(estoqueConvertido);
         } else {

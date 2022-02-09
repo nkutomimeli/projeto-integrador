@@ -9,7 +9,6 @@ import com.example.demo.service.CarrinhoService;
 import com.example.demo.utils.MockCarrinho;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 
@@ -31,8 +30,8 @@ public class CarrinhoServiceTest {
     private Anuncio anuncio;
     private CarrinhoDTO dto;
     private CarrinhoDTO dtoUpdate;
-    private CarrinhoService carrinhoService;
     private ItemCarrinhoRepository mockItemCarrinho;
+    private CarrinhoService carrinhoService;
 
     @BeforeEach
     public void init() {
