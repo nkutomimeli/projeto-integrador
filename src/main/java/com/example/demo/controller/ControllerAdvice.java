@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.exception.CarrinhoInexistenteException;
+import com.example.demo.exception.ItensCarrinhoVazioException;
 import com.example.demo.exception.ProdutoVazioException;
 import exception.BusinessException;
 import org.springframework.http.ResponseEntity;
@@ -90,5 +91,18 @@ public class ControllerAdvice {
     protected ResponseEntity<Object> handleCarrinhoInexistenteException(CarrinhoInexistenteException ex, WebRequest request) {
         return ResponseEntity.notFound().build();
     }
+
+    /**
+     * O handler usado para tratar a listagem de carrinho inexistente.
+     * @param ex (ItensCarrinhoVazioException)
+     * @param request (WebRequest)
+     * @return HTTPResponse 404 com a mensagem de erro (String)
+     */
+    @ExceptionHandler(ItensCarrinhoVazioException.class)
+    protected ResponseEntity<Object> handleItensCarrinhoVazioException(ItensCarrinhoVazioException ex, WebRequest request) {
+        return ResponseEntity.notFound().build();
+    }
+
+
 
 }
