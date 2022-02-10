@@ -17,6 +17,11 @@ public class FreteController {
     @Autowired
     private CarrinhoFreteService carrinhoFreteService;
 
+    /**
+     * Método para retornar um carrinho e seu valor de frete
+     * @param (Long) id
+     * @return (ResponseEntity<CarrinhoFreteDTO>) Um carrinho com informações de preço e frete
+     */
     @GetMapping("/frete") // ?carrinho_id
     public ResponseEntity<CarrinhoFreteDTO> CalculaFreteCarrinho (@RequestParam("carrinho_id") Long id) {
         CarrinhoFreteDTO carrinhoFreteDTO = carrinhoFreteService.getCarrinhoComFreteById(id);

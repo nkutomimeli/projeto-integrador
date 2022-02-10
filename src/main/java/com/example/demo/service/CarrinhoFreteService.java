@@ -38,6 +38,11 @@ public class CarrinhoFreteService {
         this.veiculoRepository = veiculoRepository;
     }
 
+    /**
+     * Método para retornar um carrinho com seus valores de custo
+     * @param (Long) ID do carrinho
+     * @return (CarrinhoFreteDTO) DTO com informações do carrinho
+     */
     public CarrinhoFreteDTO getCarrinhoComFreteById(Long id) {
         Optional<Carrinho> carrinhoOptional = carrinhoRepository.findById(id);
         if (carrinhoOptional.isEmpty()) throw new CarrinhoInexistenteException("Não foi encontrado carrinho com este ID.");
@@ -48,6 +53,11 @@ public class CarrinhoFreteService {
         return carrinhoFreteDTO;
     }
 
+    /**
+     * Método para criar um CarrinhoFreteDTO
+     * @param (Carrinho) carrinho
+     * @return (CarrinhoFreteDTO) um DTO com os valores do carrinho
+     */
     private CarrinhoFreteDTO getCarrinhoComFreteDTO(Carrinho carrinho) {
         BigDecimal frete = calculaFrete(carrinho);
         BigDecimal subtotal = new BigDecimal(itemCarrinhoRepository.totalPreco(carrinho.getId())).setScale(2, RoundingMode.HALF_UP);
@@ -69,6 +79,11 @@ public class CarrinhoFreteService {
         return carrinhoFreteDTO;
     }
 
+    /**
+     * Método para calcular o frete total de um carrinho
+     * @param (Carrinho) carrinho
+     * @return (BigDecimal) o valor do frete total
+     */
     private BigDecimal calculaFrete(Carrinho carrinho) {
 
         HashMap fretes = new HashMap<Tipos, BigDecimal>();
