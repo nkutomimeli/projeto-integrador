@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Classe que contém a lógica de negócio da classe Carrinho
+ */
 @Service
 public class CarrinhoService {
 
@@ -29,14 +32,33 @@ public class CarrinhoService {
     @Autowired
     EstoqueRepository estoqueRepository;
 
+    public CarrinhoService(CarrinhoRepository mockCarrinho, AnuncioRepository mockAnuncio, CompradorRepository mockComprador,
+                           EstoqueRepository mockEstoque, ItemCarrinhoRepository mockItemCarrinho) {
+        this.carrinhoRepository = mockCarrinho;
+        this.anuncioRepository = mockAnuncio;
+        this.compradorRepository = mockComprador;
+        this.estoqueRepository = mockEstoque;
+        this.itemCarrinhoRepository = mockItemCarrinho;
+    }
+
+    /**
+     * Método para salvar um carrinho e exibir o preço total do carrinho
+     * @param (CarrinhoDTO) carrinhoDTO
+     * @return (PrecoTotalDTO) com o valor total do carrinho
+     */
     public PrecoTotalDTO save(CarrinhoDTO carrinhoDTO) {
+
+        Comprador comprador = this.compradorRepository.findById(carrinhoDTO.getComprador_id()).orElse(new Comprador());
+        if(comprador.getId() == null) {
+            throw new RuntimeException("Comprador não localizado. Verifique o id do comprador.");
+        }
+
         // Faz validação da quantidade de estoque e data de validade
         if(!checkStockAndExpirationDate(carrinhoDTO)) {
             throw new RuntimeException("Estoque insuficiente ou validade a expirar");
         }
 
         // Salva o Carrinho no banco de dados
-        Comprador comprador = this.compradorRepository.findById(carrinhoDTO.getComprador_id()).orElse(new Comprador());
         Carrinho carrinho = CarrinhoDTO.converte(carrinhoDTO, comprador);
         Carrinho carrinhoSalvo = this.carrinhoRepository.save(carrinho);
 
@@ -56,13 +78,32 @@ public class CarrinhoService {
                 .build();
     }
 
+    /**
+     * Método para buscar um carrinho pelo ID
+     * @param (Long) id
+     * @return (CarrinhoDTO) carrinho
+     */
     public CarrinhoDTO getCarrinhoById(Long id) {
+
         // Retorna Carrinho pelo id
         Carrinho carrinho = this.carrinhoRepository.findById(id).orElse(new Carrinho());
+        if( carrinho.getId() == null) { throw new RuntimeException("Carrinho com id " + id + " não existe."); }
+
         return CarrinhoDTO.converte(carrinho);
     }
 
+    /**
+     * Método para atualizar um carrinho de compra
+     * @param (CarrinhoDTO) carrinhoDTO
+     * @param (Long) id
+     * @return (CarrinhoDTO) carrinhoSalvo
+     */
     public CarrinhoDTO update(CarrinhoDTO carrinhoDTO, Long id) {
+
+        if(this.compradorRepository.findById(carrinhoDTO.getComprador_id()).orElse(new Comprador()).getId() == null) {
+            throw new RuntimeException("Comprador não localizado. Verifique o id do comprador.");
+        }
+
         // Faz validação da quantidade de estoque e data de validade
         if(!checkStockAndExpirationDate(carrinhoDTO)) {
             throw new RuntimeException("Estoque insuficiente ou validade a expirar");
@@ -70,24 +111,37 @@ public class CarrinhoService {
 
         // Atualiza o Carrinho no banco de dados
         Carrinho carrinho = this.carrinhoRepository.findById(id).orElse(new Carrinho());
-        Carrinho carrinhoSalvo = this.carrinhoRepository.save(carrinho);
+        if(carrinho.getId() == null) { throw new RuntimeException("Carrinho não localizado. Verifique o id do carrinho."); }
+
+        Carrinho carrinhoSalvo = this.carrinhoRepository.saveAndFlush(carrinho);
 
         // Atualiza o ItemCarrinho no banco de dados
         Set<ItemCarrinhoDTO> listaItemCarrinho = carrinhoDTO.getListaAnuncio();
         listaItemCarrinho.forEach((item -> {
             ItemCarrinho itemCarrinho = this.itemCarrinhoRepository.findById(item.getId()).orElse(new ItemCarrinho());
+            if(itemCarrinho.getId() == null) { throw new RuntimeException("Item com id " + item.getId() + " não existe."); }
+
             Anuncio anuncio = this.anuncioRepository.findById(item.getAnuncio_id()).orElse(new Anuncio());
             itemCarrinho.setCarrinho(carrinhoSalvo);
             itemCarrinho.setAnuncio(anuncio);
             decreaseStock(item.getAnuncio_id(), item.getQuantidade());
-            this.itemCarrinhoRepository.save(ItemCarrinhoDTO.converte(item, anuncio, carrinhoSalvo));
+            this.itemCarrinhoRepository.saveAndFlush(ItemCarrinhoDTO.converte(item, anuncio, carrinhoSalvo));
         }));
         return CarrinhoDTO.converte(carrinhoSalvo);
     }
 
+    /**
+     * Método para validar se existe anúncio que atendem aos requisitos: quantidade maior que zero
+     * e validade igual ou maior do que 21 dias
+     * @param (CarrinhoDTO) dto
+     * @return (Boolean) true
+     */
     private Boolean checkStockAndExpirationDate(CarrinhoDTO dto) {
         // Flag para verificar se existe anúncio que atenda a esses requisitos
         for (ItemCarrinhoDTO item : dto.getListaAnuncio()) {
+            if (anuncioRepository.findById(item.getAnuncio_id()).orElse(new Anuncio()).getId() == null ) {
+                throw new RuntimeException("Anúncio com id " + item.getAnuncio_id() + " não existe.");
+            }
             Long idResultante = this.anuncioRepository.findAnuncioByIdStockAndDateValid(item.getAnuncio_id(), item.getQuantidade());
             if(idResultante == null) {
                 return false;
@@ -96,6 +150,11 @@ public class CarrinhoService {
         return true;
     }
 
+    /**
+     * Método privado para decrementar o estoque
+     * @param (Long) anuncio_id
+     * @param (Integer) quantidade
+     */
     private void decreaseStock(Long anuncio_id, Integer quantidade) {
         // Decrementar estoque
         LocalDate dataValidade = LocalDate.now().plusDays(21);

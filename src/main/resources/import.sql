@@ -70,15 +70,43 @@ Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidad
 Insert into estoque (anuncio_id, ordem_entrada_id, quantidade_inicial, quantidade_atual, temperatura_atual, data_validade, data_producao) values (7, 11, 350, 350, -5, '2022-11-17', '2022-01-25 22:15:00');
 
 --Inserção de comprador
-Insert into comprador (nome, username, senha) values ('Fernando Ventura', 'fernando', '123456');
-Insert into comprador (nome, username, senha) values ('Marcos Augusto', 'marcos', '123456');
-Insert into comprador (nome, username, senha) values ('Maria Ferreira', 'maria', '123456');
-Insert into comprador (nome, username, senha) values ('Carlos Henrique', 'carlos', '123456');
-Insert into comprador (nome, username, senha) values ('Constatino Augusto', 'constatino', '123456');
-Insert into comprador (nome, username, senha) values ('Camila Pitanga', 'camila', '123456');
-Insert into comprador (nome, username, senha) values ('Toni Ferreira', 'toni, '123456');
-Insert into comprador (nome, username, senha) values ('Augusto Ventura', 'augusto', '123456');
-Insert into comprador (nome, username, senha) values ('Ventura Ferreira', 'ventura', '123456');
+-- Insert into comprador (nome) values ('Fernando Ventura');
+-- Insert into comprador (nome) values ('Marcos Augusto');
+-- Insert into comprador (nome) values ('Maria Ferreira');
+-- Insert into comprador (nome) values ('Carlos Henrique');
+-- Insert into comprador (nome) values ('Constatino Augusto');
+-- Insert into comprador (nome) values ('Camila Pitanga');
+-- Insert into comprador (nome) values ('Toni Ferreira');
+-- Insert into comprador (nome) values ('Augusto Ventura');
+-- Insert into comprador (nome) values ('Ventura Ferreira');
+
+
+--Inserção de usuario
+Insert into usuario(username, enabled, password) values ('lucian', true, '$2a$10$tzz.cCKJZz9nFCu.KT8Dcumnj9CR58Owwx/.VPhMqrQ4rt.EJRQhG' );
+Insert into usuario(username, enabled, password) values ('iohara', true, '$2a$10$tzz.cCKJZz9nFCu.KT8Dcumnj9CR58Owwx/.VPhMqrQ4rt.EJRQhG' );
+Insert into usuario(username, enabled, password) values ('nathan', true, '$2a$10$tzz.cCKJZz9nFCu.KT8Dcumnj9CR58Owwx/.VPhMqrQ4rt.EJRQhG' );
+Insert into usuario(username, enabled, password) values ('ismael', true, '$2a$10$tzz.cCKJZz9nFCu.KT8Dcumnj9CR58Owwx/.VPhMqrQ4rt.EJRQhG' );
+Insert into usuario(username, enabled, password) values ('vanessa', true, '$2a$10$tzz.cCKJZz9nFCu.KT8Dcumnj9CR58Owwx/.VPhMqrQ4rt.EJRQhG' );
+
+--Inserção de comprador
+Insert into comprador (usuario_username) values ('lucian');
+Insert into comprador (usuario_username) values ('iohara');
+Insert into comprador (usuario_username) values ('nathan');
+Insert into comprador (usuario_username) values ('ismael');
+Insert into comprador (usuario_username) values ('vanessa');
+
+--Inserção de perfil
+Insert into perfil (nome) VALUES ('Representante');
+Insert into perfil (nome) VALUES ('Comprador');
+Insert into perfil (nome) VALUES ('Vendedor');
+
+--Inserção de perfil_usuario
+Insert into perfil_usuario (perfil_id, username) values (1, 'lucian');
+Insert into perfil_usuario (perfil_id, username) values (2, 'iohara');
+Insert into perfil_usuario (perfil_id, username) values (2, 'nathan');
+Insert into perfil_usuario (perfil_id, username) values (3, 'ismael');
+Insert into perfil_usuario (perfil_id, username) values (1, 'vanessa');
+
 
 -- Inserção de Carrinho_comprador
 Insert into carrinho (comprador_id, data_criacao, status) values (1, '2021-01-27 11:00:00', 0);
@@ -90,7 +118,7 @@ Insert into carrinho (comprador_id, data_criacao, status) values (3, '2020-01-17
 Insert into carrinho (comprador_id, data_criacao, status) values (3, '2022-01-17 11:00:00', 0);
 Insert into carrinho (comprador_id, data_criacao, status) values (4, '2021-01-17 11:00:00', 0);
 Insert into carrinho (comprador_id, data_criacao, status) values (5, '2022-01-27 11:00:00', 0);
-Insert into carrinho (comprador_id, data_criacao, status) values (6, '2020-01-27 11:00:00', 0);
+Insert into carrinho (comprador_id, data_criacao, status) values (5, '2020-01-27 11:00:00', 0);
 
 --Inserção de Item_carrinho
 Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (1, 1, 10, 5);
@@ -104,5 +132,3 @@ Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (3
 Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 12, 23);
 Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 12, 23);
 Insert into item_carrinho (anuncio_id, carrinho_id, quantidade, preco) values (4, 1, 10, 23);
-
-
