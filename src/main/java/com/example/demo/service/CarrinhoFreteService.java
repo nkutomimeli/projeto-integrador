@@ -49,8 +49,8 @@ public class CarrinhoFreteService {
     }
 
     private CarrinhoFreteDTO getCarrinhoComFreteDTO(Carrinho carrinho) {
-        BigDecimal subtotal = new BigDecimal(itemCarrinhoRepository.totalPreco(carrinho.getId()));
         BigDecimal frete = calculaFrete(carrinho);
+        BigDecimal subtotal = new BigDecimal(itemCarrinhoRepository.totalPreco(carrinho.getId())).setScale(2, RoundingMode.HALF_UP);
         BigDecimal total = subtotal.add(frete);
 
         PrecoDTO precoDTO = PrecoDTO.builder()

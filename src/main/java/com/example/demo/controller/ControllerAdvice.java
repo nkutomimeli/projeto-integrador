@@ -100,7 +100,7 @@ public class ControllerAdvice {
      */
     @ExceptionHandler(ItensCarrinhoVazioException.class)
     protected ResponseEntity<Object> handleItensCarrinhoVazioException(ItensCarrinhoVazioException ex, WebRequest request) {
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
 
