@@ -42,9 +42,9 @@ possam montar o (s) pedido (s) para despachá-los.
 ![IntelliJIDEA](https://img.shields.io/badge/IntelliJIDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
 
-## 🔗 Links Úteis [🔝](#welcome-badges-4-readmemd-profile)
+## 🔗 Links Úteis
 
-#### * Para baixar as Coleções do Postaman:
+#### * Para baixar as Coleções do Postman:
 
 [![PostMan](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white)](https://app.getpostman.com/run-collection/6803f5c6bc63844d9118?action=collection%2Fimport)
 

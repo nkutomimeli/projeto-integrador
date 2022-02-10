@@ -33,7 +33,6 @@ public class AnuncioController {
         return ResponseEntity.status(HttpStatus.OK).body(listaAnuncios);
     }
 
-//    @GetMapping("/list") // ?anuncio_id=FRESCO
     @GetMapping("/list/anuncio/{anuncio_id}") // /anuncio/1
     public ResponseEntity<AnuncioInternoDTO> getAnuncioPorId(@PathVariable("anuncio_id") Long anuncioId) {
         AnuncioInternoDTO anuncioInternoDTO = anuncioService.getAnuncioById(anuncioId);

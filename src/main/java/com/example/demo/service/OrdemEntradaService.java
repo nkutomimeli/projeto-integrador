@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.*;
 
+/**
+ * Classe que contem a logica de negocio da entidade OrdemEntrada
+ */
 @Service
 public class OrdemEntradaService {
 
@@ -38,6 +41,11 @@ public class OrdemEntradaService {
     // MÉTODOS PRINCIPAIS //
     // ------------------ //
 
+    /**
+     * Método para salvar uma ordem de Entrada
+     * @param (InboundOrderDTO) inboundOrderDTO
+     * @return (List<EstoqueDTO) estoqueCadastrado
+     */
     @SneakyThrows
     public List<EstoqueDTO> save(InboundOrderDTO inboundOrderDTO){
         Setor setor = this.setorRepository.getById(inboundOrderDTO.getOrdemEntradaDTO().getSetor_id());
@@ -65,6 +73,12 @@ public class OrdemEntradaService {
         return EstoqueDTO.converte(estoqueCadastrado);
     }
 
+    /**
+     * Método para atualizar uma ordem de entrada
+     * @param (InboundOrderDTO) inboundOrderDTO
+     * @param (Long) id
+     * @return (InboundOrderDTO) ordemEntradaSalva
+     */
     @SneakyThrows
     public InboundOrderDTO update(InboundOrderDTO inboundOrderDTO, Long id) {
         OrdemEntrada ordemEntrada = this.ordemEntradaRepository.findById(id).orElse(new OrdemEntrada());
@@ -89,6 +103,11 @@ public class OrdemEntradaService {
         return InboundOrderDTO.converte(ordemEntradaSalva);
     }
 
+    /**
+     * Método para obter a capacidade do setor
+     * @param (Long) setorId
+     * @return (CapacidadeSetor)
+     */
     public CapacidadeSetor getCapacidadeSetor(Long setorId){
         return this.setorRepository.getCapacidadeSetorById(setorId);
     }
@@ -98,10 +117,21 @@ public class OrdemEntradaService {
     // MÉTODOS DE PERSISTÊNCIA //
     // ----------------------- //
 
+    /**
+     * Método para obter uma ordem de entrada buscando pelo ID
+     * @param (Long) id
+     * @return (OrdemEntrada)
+     */
     public OrdemEntrada getOrdemById(Long id) {
         return this.ordemEntradaRepository.findById(id).orElse(new OrdemEntrada());
     }
 
+    /**
+     * Método privado para salvar a ordem de entrada
+     * @param (OrdemEntrada) ordemEntrada
+     * @return (OrdemEntrada) ordemEntrada
+     * @throws BusinessException em caso de não haver setor cadastrado
+     */
     private OrdemEntrada saveOrdemEntrada(OrdemEntrada ordemEntrada) throws BusinessException {
         try{
             return this.ordemEntradaRepository.save(ordemEntrada);
@@ -110,12 +140,24 @@ public class OrdemEntradaService {
         }
     }
 
+    /**
+     * Método privado para salvar uma lista de estoque
+     * @param (Set<EstoqueDTO>) listaEstoque
+     * @param (OrdemEntrada) ordemEntrada
+     * @param (Setor) setor
+     */
     private void saveListaEstoque(Set<EstoqueDTO> listaEstoque, OrdemEntrada ordemEntrada, Setor setor){
         listaEstoque.forEach(estoque -> {
             saveEstoque(estoque, ordemEntrada, setor);
         });
     }
 
+    /**
+     * Método privado para salvar estoque
+     * @param (EstoqueDTO) estoque
+     * @param (OrdemEntrada) ordemEntrada
+     * @param (Setor) setor
+     */
     private void saveEstoque(EstoqueDTO estoque, OrdemEntrada ordemEntrada, Setor setor){
         Anuncio anuncio = this.anuncioRepository.findById(estoque.getAnuncio_id()).orElse(new Anuncio());
 
@@ -133,6 +175,11 @@ public class OrdemEntradaService {
     // MÉTODOS AUXILIARES //
     // ------------------ //
 
+    /**
+     * Método privado para retornar o volume total de uma lista de estoque para usar no método update
+     * @param (Set<EstoqueDTO>) listaEstoque
+     * @return (Double) volumeTotal
+     */
     private double getVolume(Set<EstoqueDTO> listaEstoque){
         double volumeTotal = 0.0;
         for (EstoqueDTO estoque : listaEstoque) {
