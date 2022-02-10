@@ -189,23 +189,22 @@ public class EstoqueServiceTest {
                         .build()
         );
 
-        LocalDate dataValidade =  LocalDate.now().plusDays(1);
+        long numeroDias = 21;
+        LocalDate dataValidade =  LocalDate.now().plusDays(numeroDias);
 
-        List<Estoque> listaEstoqueDTO = new ArrayList<>();
+        List<Estoque> listaEstoqueFiltrada = new ArrayList<>();
         for(Estoque e: listaEstoque) {
            if((e.getDataValidade().isAfter(dataValidade) || e.getDataValidade().equals(dataValidade) ) && e.getOrdemEntrada().getSetor().getId() == 3){
-               listaEstoqueDTO.add(e);
-               System.out.println("\n\n ESTOQUE ID: " + e.getId());
+               listaEstoqueFiltrada.add(e);
            }
         }
         EstoqueRepository estoqueRepository = Mockito.mock(EstoqueRepository.class);
-        Mockito.when(estoqueRepository.getAnunciosBySetorValidadeRep(1L, 1L, dataValidade)).thenReturn(listaEstoqueDTO);
-
+        Mockito.when(estoqueRepository.getAnunciosBySetorValidadeRep(1L, 1L, dataValidade)).thenReturn(listaEstoqueFiltrada);
         EstoqueService estoqueService = new EstoqueService(estoqueRepository);
-        estoqueService.getAllEstoqueBySetorIdDataValidade(1L, 21L);
-        EstoqueSetorIdDataValidadeDTO dto = EstoqueSetorIdDataValidadeDTO.converte(listaEstoque.get(0));
-        EstoqueSetorIdDataValidadeDTO dto2 = EstoqueSetorIdDataValidadeDTO.converte(listaEstoqueDTO.get(0));
-        assert(dto2.equals(dto));
+
+        List<EstoqueSetorIdDataValidadeDTO> listaEstoqueService = estoqueService.getAllEstoqueBySetorIdDataValidade(1L, numeroDias);
+        List<EstoqueSetorIdDataValidadeDTO> listaEstoqueMock = EstoqueSetorIdDataValidadeDTO.converte(listaEstoqueFiltrada);
+        assert(listaEstoqueMock.equals(listaEstoqueService));
     }
 
     @Test
@@ -373,23 +372,23 @@ public class EstoqueServiceTest {
                         .build()
         );
 
-        LocalDate dataValidade =  LocalDate.now().plusDays(1);
+        long numeroDias = 1L;
+        LocalDate dataValidade =  LocalDate.now().plusDays(numeroDias);
 
-        List<Estoque> listaEstoqueDTO = new ArrayList<>();
+        List<Estoque> listaEstoqueFiltrado = new ArrayList<>();
         for(Estoque e: listaEstoque) {
             if((e.getDataValidade().isAfter(dataValidade) || e.getDataValidade().equals(dataValidade) ) && e.getAnuncio().getTipo().getDescricao().equals(Tipos.CONGELADO.getDescricao())){
-                listaEstoqueDTO.add(e);
-                System.out.println("\n\n ESTOQUE ID: " + e.getId());
+                listaEstoqueFiltrado.add(e);
             }
         }
 
         EstoqueRepository estoqueRepository = Mockito.mock(EstoqueRepository.class);
-        Mockito.when(estoqueRepository.getAnunciosBySetorValidadeRep(1L, 1L, dataValidade)).thenReturn(listaEstoqueDTO);
-
+        Mockito.when(estoqueRepository.getEstoqueByDataValidadeCategoria(dataValidade, 2)).thenReturn(listaEstoqueFiltrado);
         EstoqueService estoqueService = new EstoqueService(estoqueRepository);
-        estoqueService.getEstoqueByDataValidadeCategoria(1L, 2, "asc");
-        EstoqueSetorIdDataValidadeDTO dto = EstoqueSetorIdDataValidadeDTO.converte(listaEstoque.get(1));
-        EstoqueSetorIdDataValidadeDTO dto2 = EstoqueSetorIdDataValidadeDTO.converte(listaEstoqueDTO.get(0));
-        assert(dto2.equals(dto));
+
+        List<EstoqueSetorIdDataValidadeDTO> listaEstoqueService = estoqueService.getEstoqueByDataValidadeCategoria(numeroDias, 2, "asc");
+
+        List<EstoqueSetorIdDataValidadeDTO> listaEstoqueMock = EstoqueSetorIdDataValidadeDTO.converte(listaEstoqueFiltrado);
+        assert(listaEstoqueMock.equals(listaEstoqueService));
     }
 }
